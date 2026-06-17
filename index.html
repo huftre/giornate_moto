@@ -95,6 +95,43 @@ main{max-width:980px;margin:0 auto;padding:14px}
 /* Schede "Per il biker": bordo arancione laterale */
 .biker-card{position:relative;border-left:6px solid var(--orange)}.biker-tag{display:inline-block;margin-bottom:10px;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:900;text-transform:uppercase}.biker-note{margin:0 0 18px;color:#6b7280;font-size:15px;line-height:1.45;font-style:italic}
 .rules-card{border-left:6px solid var(--green)}.rules-empty{margin:0;color:var(--muted);font-size:16px;line-height:1.45;font-style:italic}.footer-space{height:18px}
+.rule-block {
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+
+.rule-block:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.rule-block h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.rule-block ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.rule-block li {
+  margin: 8px 0;
+  line-height: 1.4;
+  color: #374151;
+}
+
+.final-warning {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+  font-weight: 900;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
 /* ==========================================================
    DESKTOP
    Da 800px in su:
@@ -131,83 +168,105 @@ main{max-width:980px;margin:0 auto;padding:14px}
      Ogni bottone apre una sezione diversa.
      data-tab="sabato" apre <section id="sabato">
      ========================================================== -->
-<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
+<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
+   <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
 <!-- ==========================================================
      TAB GENERALE INFO
      È aperto di default grazie a class="active".
      Qui trovi Missione del weekend e Regolamento.
      ========================================================== -->
-<section id="generale" class="day-panel active"><section class="mission-card"><h2>🏆 Missione del weekend</h2><ul><li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li><li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li></ul><div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div></section><h2 class="section-title">📌 Regolamento</h2><section class="rules-card"><!-- REGOLAMENTO: sostituisci questa frase con il regolamento completo quando vuoi inserirlo -->
-<section class="rules-card">
-<div class="rule-block">
-  <h3>✅ Regole di base</h3>
-  <ul>
-    <li>Gli organizzatori non si assumono responsabilità per incidenti, danni a persone o cose, violazioni del Codice della Strada o comportamenti imprudenti.</li>
-    <li>Ognuno partecipa volontariamente ed è responsabile di sé stesso, della propria moto e delle proprie decisioni.</li>
-    <li>La sicurezza viene prima della fretta: non stiamo facendo qualifiche, stiamo andando a divertirci.</li>
-    <li>Nessuno deve sentirsi obbligato a tenere un ritmo superiore alle proprie capacità.</li>
-  </ul>
-</div>
+<section id="generale" class="day-panel active">
+  <section class="mission-card">
+    <h2>🏆 Missione del weekend</h2>
 
-<div class="rule-block">
-  <h3>🏍️ Formazione</h3>
-  <ul>
-    <li>Apripista che non va superato.</li>
-    <li>Staffette libere di muoversi nel gruppo: tenere la destra e lasciare spazio.</li>
-    <li>Scopetta che chiude la fila e assiste chi resta indietro.</li>
-  </ul>
-</div>
+    <ul>
+      <li>✅ 1.148 km di strada</li>
+      <li>✅ Curve spettacolari</li>
+      <li>✅ Buona compagnia</li>
+      <li>✅ Ottimo cibo</li>
+      <li>✅ Tante risate</li>
+      <li>❌ Dieta</li>
+      <li>❌ Risparmio carburante</li>
+      <li>❌ Andare a letto presto</li>
+    </ul>
 
-<div class="rule-block">
-  <h3>🚦 Durante la guida</h3>
-  <ul>
-    <li>Mantenere sempre una distanza di sicurezza adeguata.</li>
-    <li>Evitare sorpassi all’interno del gruppo salvo necessità.</li>
-    <li>Guidare in modo fluido e prevedibile.</li>
-    <li>Segnalare ostacoli e situazioni particolari agli altri motociclisti.</li>
-    <li>Restare ordinati e tendenzialmente sulla destra.</li>
-  </ul>
-</div>
+    <div class="warning">
+      Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻
+    </div>
+  </section>
 
-<div class="rule-block">
-  <h3>📍 Se ci si separa dal gruppo</h3>
-  <ul>
-    <li>Niente rincorse.</li>
-    <li>Raggiungere il successivo punto concordato con il proprio passo.</li>
-    <li>Il gruppo si ricompatta nei punti stabiliti.</li>
-  </ul>
-</div>
+  <h2 class="section-title">📌 Regolamento</h2>
 
-<div class="rule-block">
-  <h3>🤝 Rispetto</h3>
-  <ul>
-    <li>Per tutti gli utenti della strada.</li>
-    <li>Per chi ha meno esperienza.</li>
-    <li>Per chi ha più esperienza ma mantiene il proprio passo.</li>
-    <li>Collaborazione e spirito di gruppo sempre.</li>
-  </ul>
-</div>
+  <section class="rules-card">
+    <div class="rule-block">
+      <h3>✅ Regole di base</h3>
+      <ul>
+        <li>Gli organizzatori non si assumono responsabilità per incidenti, danni a persone o cose, violazioni del Codice della Strada o comportamenti imprudenti.</li>
+        <li>Ognuno partecipa volontariamente ed è responsabile di sé stesso, della propria moto e delle proprie decisioni.</li>
+        <li>La sicurezza viene prima della fretta: non stiamo facendo qualifiche, stiamo andando a divertirci.</li>
+        <li>Nessuno deve sentirsi obbligato a tenere un ritmo superiore alle proprie capacità.</li>
+      </ul>
+    </div>
 
-<div class="rule-block">
-  <h3>🚫 Non sono ammessi</h3>
-  <ul>
-    <li>Sorpassi rischiosi.</li>
-    <li>Impennate o stunt.</li>
-    <li>Gare tra partecipanti.</li>
-    <li>Guida sotto effetto di alcol o sostanze.</li>
-    <li>Comportamenti che possano mettere in difficoltà il gruppo.</li>
-  </ul>
-</div>
+    <div class="rule-block">
+      <h3>🏍️ Formazione</h3>
+      <ul>
+        <li>Apripista che non va superato.</li>
+        <li>Staffette libere di muoversi nel gruppo: tenere la destra e lasciare spazio.</li>
+        <li>Scopetta che chiude la fila e assiste chi resta indietro.</li>
+      </ul>
+    </div>
 
-<div class="final-warning">
-  Gli organizzatori possono allontanare chi compromette la sicurezza o la serenità dell’uscita.
-</div>
+    <div class="rule-block">
+      <h3>🚦 Durante la guida</h3>
+      <ul>
+        <li>Mantenere sempre una distanza di sicurezza adeguata.</li>
+        <li>Evitare sorpassi all’interno del gruppo salvo necessità.</li>
+        <li>Guidare in modo fluido e prevedibile.</li>
+        <li>Segnalare ostacoli e situazioni particolari agli altri motociclisti.</li>
+        <li>Restare ordinati e tendenzialmente sulla destra.</li>
+      </ul>
+    </div>
 
-<div class="warning">
-  🏁 L’obiettivo non è arrivare primi, ma arrivare tutti insieme e divertirci. 🍝🏍️😎✌️
-</div>
+    <div class="rule-block">
+      <h3>📍 Se ci si separa dal gruppo</h3>
+      <ul>
+        <li>Niente rincorse.</li>
+        <li>Raggiungere il successivo punto concordato con il proprio passo.</li>
+        <li>Il gruppo si ricompatta nei punti stabiliti.</li>
+      </ul>
+    </div>
+
+    <div class="rule-block">
+      <h3>🤝 Rispetto</h3>
+      <ul>
+        <li>Per tutti gli utenti della strada.</li>
+        <li>Per chi ha meno esperienza.</li>
+        <li>Per chi ha più esperienza ma mantiene il proprio passo.</li>
+        <li>Collaborazione e spirito di gruppo sempre.</li>
+      </ul>
+    </div>
+
+    <div class="rule-block">
+      <h3>🚫 Non sono ammessi</h3>
+      <ul>
+        <li>Sorpassi rischiosi.</li>
+        <li>Impennate o stunt.</li>
+        <li>Gare tra partecipanti.</li>
+        <li>Guida sotto effetto di alcol o sostanze.</li>
+        <li>Comportamenti che possano mettere in difficoltà il gruppo.</li>
+      </ul>
+    </div>
+
+    <div class="final-warning">
+      Gli organizzatori possono allontanare chi compromette la sicurezza o la serenità dell’uscita.
+    </div>
+
+    <div class="warning">
+      🏁 L’obiettivo non è arrivare primi, ma arrivare tutti insieme e divertirci. 🍝🏍️😎✌️
+    </div>
+  </section>
 </section>
-
 <!-- ==========================================================
      TAB SABATO
      Qui puoi modificare:
