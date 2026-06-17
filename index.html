@@ -1,53 +1,176 @@
 <!doctype html>
+<!--
+============================================================
+TOSCANA - ROMAGNA — INDEX.HTML COMMENTATO
+============================================================
+
+Questo file va caricato su GitHub Pages con nome: index.html
+
+GUIDA RAPIDA MODIFICHE:
+- Titolo grande: cerca "TOSCANA - ROMAGNA"
+- Sottotitolo: cerca "Parecchia benzina..."
+- Foto header: cerca ".hero" e cambia l'URL dentro url(...)
+- Bottoni header: cerca "Vai al programma" e "Informazioni"
+- Tab: cerca "tabbar"
+- Sezione Generale: cerca id="generale"
+- Sabato: cerca id="sabato"
+- Domenica: cerca id="domenica"
+- Lunedì: cerca id="lunedi"
+- Mappe: cerca "<iframe src="
+- Link percorso completo: cerca "mini-btn red"
+- Foto: cerca "photo-card"
+- Punti biker: cerca "biker-card"
+- Regolamento: cerca "Regolamento da inserire"
+- Funzione tab: cerca "function activateTab"
+
+============================================================
+-->
 <html lang="it">
 <head>
+<!-- Codifica caratteri: lasciala così per accenti ed emoji -->
 <meta charset="utf-8">
+<!-- Viewport: rende il sito responsive su iPhone e smartphone -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Titolo che compare nella scheda del browser -->
 <title>TOSCANA - ROMAGNA</title>
 <style>
+/* ==========================================================
+   COLORI PRINCIPALI
+   Puoi cambiare qui i colori generali:
+   --bg = sfondo pagina
+   --text = colore testo
+   --muted = grigio descrizioni
+   --card = colore schede
+   --red = pulsanti rossi
+   --blue = pulsanti blu
+   --orange = bordo sezione biker
+   --green = bordo regolamento
+   --dark = tab attivo e orari
+   ========================================================== */
 :root {--bg:#f3f4f6;--text:#111827;--muted:#6b7280;--card:#fff;--red:#dc2626;--blue:#2563eb;--border:#e5e7eb;--orange:#ea580c;--green:#15803d;--dark:#111827;}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+/* ==========================================================
+   HEADER
+   Qui puoi modificare:
+   - spazio sopra/sotto: padding
+   - foto grande: URL dentro url("...")
+   - posizione foto: background-position
+   ========================================================== */
 .hero{padding:44px 18px 34px;color:white;background:linear-gradient(135deg,rgba(17,24,39,.94),rgba(31,41,55,.82)),url("https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg");background-size:cover;background-position:center}
 .hero h1{font-size:36px;line-height:1.05;margin:0;letter-spacing:.3px;text-transform:uppercase}.hero .subtitle{margin:12px 0 0;color:#e5e7eb;font-size:16px;line-height:1.45}
+/* Bottoni principali sotto il titolo */
 .buttons{display:flex;flex-direction:column;gap:12px;margin-top:24px}.btn{display:block;text-align:center;text-decoration:none;color:white;padding:17px 16px;border-radius:16px;font-weight:800;font-size:17px}.btn.red{background:var(--red)}.btn.blue{background:var(--blue)}
+/* Contenitore principale della pagina */
 main{max-width:980px;margin:0 auto;padding:14px}
+/* ==========================================================
+   TAB BAR
+   Barra con Generale / Sabato / Domenica / Lunedì.
+   Per cambiare nomi e date visibili modifica i bottoni dentro <!-- ==========================================================
+     TAB BAR
+     Ogni bottone apre una sezione diversa.
+     data-tab="sabato" apre <section id="sabato">
+     ========================================================== -->
+<nav class="tabbar">.
+   ========================================================== */
 .tabbar{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:rgba(243,244,246,.96);backdrop-filter:blur(10px);padding:10px 0 12px;margin-bottom:8px}
 .tab-button{border:1px solid var(--border);background:white;color:var(--text);border-radius:15px;padding:11px 6px;font-weight:900;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.05)}.tab-button small{color:var(--muted);font-weight:800}.tab-button.active{background:var(--dark);color:white;border-color:var(--dark)}.tab-button.active small{color:#d1d5db}
+/* I pannelli dei giorni sono nascosti, tranne quello con class="active" */
 .day-panel{display:none}.day-panel.active{display:block}
+/* Schede bianche: mappa, programma, foto, biker, missione e regolamento */
 .map-card,.card,.photo-card,.biker-card,.rules-card,.mission-card{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.05);margin-bottom:18px}
+/* Mappa Google incorporata.
+   Modifica height:420px per cambiare altezza della mappa su mobile/tablet. */
 .map-wrap{width:100%;height:420px;background:#e5e7eb}.map-wrap iframe{width:100%;height:100%;border:0;display:block}.map-note{padding:14px 16px;color:var(--muted);font-size:15px;line-height:1.35}
 .card,.mission-card,.rules-card{padding:18px}h2{margin:0 0 14px;font-size:24px;text-transform:uppercase;letter-spacing:.4px}.km{display:inline-block;font-size:14px;color:var(--muted);background:#f3f4f6;padding:6px 10px;border-radius:999px;vertical-align:middle;margin-left:6px}
 .day-buttons{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}.mini-btn{display:block;text-decoration:none;text-align:center;background:var(--blue);color:white;border-radius:14px;padding:13px 14px;font-weight:900}.mini-btn.red{background:var(--red)}
+/* Riga programma: orario a sinistra e contenuto a destra */
 .stop{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);align-items:center}.stop:last-child{border-bottom:none}.time{min-height:54px;border-radius:16px;background:linear-gradient(135deg,#111827,#374151);color:white;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:16px;font-weight:900}
 .stop strong{display:block;font-size:18px;margin-bottom:4px}.stop span{display:block;color:var(--muted);font-size:15px;line-height:1.35}.stop a{display:inline-block;margin-top:7px;color:var(--blue);text-decoration:none;font-weight:800;font-size:15px}
 .warning{margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;border-radius:16px;padding:14px;line-height:1.35}.mission-card ul{margin:0;padding-left:22px}.mission-card li{margin:8px 0;line-height:1.4}
 .photos,.biker-grid{display:grid;grid-template-columns:1fr;gap:18px}.section-title{margin:24px 0 12px;font-size:25px;font-weight:900;text-transform:uppercase}
+/* Foto visibile dentro ogni scheda "Da fotografare".
+   Modifica height:240px per cambiare altezza foto. */
 .photo-link{display:block;height:240px;background:#dbeafe;overflow:hidden;text-decoration:none}.photo-link img{width:100%;height:100%;object-fit:cover;display:block}
 .photo-body,.biker-card{padding:16px 18px 18px}.photo-body h3,.biker-card h3{margin:0 0 8px;font-size:22px}.photo-body p,.biker-card p{margin:0 0 14px;color:#4b5563;font-size:16px;line-height:1.4}.photo-body a,.biker-card a{color:var(--blue);text-decoration:none;font-weight:800;font-size:16px}
+/* Schede "Per il biker": bordo arancione laterale */
 .biker-card{position:relative;border-left:6px solid var(--orange)}.biker-tag{display:inline-block;margin-bottom:10px;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;padding:6px 10px;border-radius:999px;font-size:13px;font-weight:900;text-transform:uppercase}.biker-note{margin:0 0 18px;color:#6b7280;font-size:15px;line-height:1.45;font-style:italic}
 .rules-card{border-left:6px solid var(--green)}.rules-empty{margin:0;color:var(--muted);font-size:16px;line-height:1.45;font-style:italic}.footer-space{height:18px}
+/* ==========================================================
+   DESKTOP
+   Da 800px in su:
+   - bottoni affiancati
+   - mappa più alta
+   - foto su 3 colonne
+   - biker su 2 colonne
+   ========================================================== */
 @media(min-width:800px){.hero{padding:52px 30px 42px}.hero h1{font-size:52px}.buttons{flex-direction:row}.btn{width:auto;min-width:280px}.map-wrap{height:520px}.photos{grid-template-columns:repeat(3,1fr)}.biker-grid{grid-template-columns:repeat(2,1fr)}.photo-link{height:190px}.day-buttons{flex-direction:row}.mini-btn{width:auto;min-width:260px}}
+/* ==========================================================
+   IPHONE / SCHERMI PICCOLI
+   Qui puoi regolare dimensioni per smartphone stretti.
+   ========================================================== */
 @media(max-width:430px){main{padding:12px 10px}.hero{padding-top:44px}.hero h1{font-size:35px}.map-wrap{height:360px}.photo-link{height:225px}.stop{grid-template-columns:78px 1fr}.time{font-size:15px}}
 </style>
 </head>
 <body>
-<section class="hero"><h1>TOSCANA - ROMAGNA</h1><p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p><div class="buttons"><a class="btn red" href="#programma">Vai al programma</a><a class="btn blue" href="#generale" id="infoButton">Informazioni</a></div></section>
-<main id="programma">
-<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
-<section id="generale" class="day-panel active"><section class="mission-card"><h2>🏆 Missione del weekend</h2><ul><li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li><li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li></ul><div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div></section><h2 class="section-title">📌 Regolamento</h2><section class="rules-card"><p class="rules-empty">Regolamento da inserire.</p></section></section>
 
+<!-- ==========================================================
+     HEADER VISIBILE
+     Modifica qui titolo, sottotitolo e bottoni principali.
+     ========================================================== -->
+<section class="hero"><h1>TOSCANA - ROMAGNA</h1><p class="subtitle">Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo, risate assicurate, tante curve e zero fretta.</p><div class="buttons"><!-- Bottone rosso: porta alla zona programma -->
+<a class="btn red" href="#programma">Vai al programma</a>
+<!-- Bottone blu: apre sempre il tab Generale Info -->
+<a class="btn blue" href="#generale" id="infoButton">Informazioni</a></div></section>
+<!-- ==========================================================
+     CONTENUTO PRINCIPALE
+     Qui dentro ci sono tab, programmi, foto, biker e regolamento.
+     ========================================================== -->
+<main id="programma">
+<!-- ==========================================================
+     TAB BAR
+     Ogni bottone apre una sezione diversa.
+     data-tab="sabato" apre <section id="sabato">
+     ========================================================== -->
+<nav class="tabbar"><button class="tab-button active" data-tab="generale">Generale<br><small>Info</small></button><button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button><button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button><button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button></nav>
+<!-- ==========================================================
+     TAB GENERALE INFO
+     È aperto di default grazie a class="active".
+     Qui trovi Missione del weekend e Regolamento.
+     ========================================================== -->
+<section id="generale" class="day-panel active"><section class="mission-card"><h2>🏆 Missione del weekend</h2><ul><li>✅ 1.148 km di strada</li><li>✅ Curve spettacolari</li><li>✅ Buona compagnia</li><li>✅ Ottimo cibo</li><li>✅ Tante risate</li><li>❌ Dieta</li><li>❌ Risparmio carburante</li><li>❌ Andare a letto presto</li></ul><div class="warning">Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻</div></section><h2 class="section-title">📌 Regolamento</h2><section class="rules-card"><!-- REGOLAMENTO: sostituisci questa frase con il regolamento completo quando vuoi inserirlo -->
+<p class="rules-empty">Regolamento da inserire.</p></section></section>
+
+<!-- ==========================================================
+     TAB SABATO
+     Qui puoi modificare:
+     - mappa sabato
+     - link percorso sabato
+     - programma sabato
+     - foto sabato
+     - punti biker sabato
+     ========================================================== -->
 <section id="sabato" class="day-panel">
   <section class="map-card">
+    <!-- MAPPA: modifica src per cambiare il percorso visualizzato nella mappa incorporata -->
     <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=41.9954429,12.6659791&daddr=42.8730,12.0160+to:43.8310,11.2000+to:44.1733,11.3383+to:44.3559,11.7161+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
   <section class="card">
     <h2>🛣️ Sabato 27/06 <span class="km">487 km</span></h2>
+    <!-- PULSANTE ROSSO PERCORSO: modifica href per cambiare il link Google Maps completo -->
     <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=ENI%20Salaria%20Est%20Roma&waypoints=IP%20Fabro%7CIP%20Sesto%20Fiorentino%7CChalet%20Raticosa%7CBar%20Renzo%20Imola&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
     <div class="stop"><div class="time">08:00</div><div><strong>Ritrovo 🤗⛽☕</strong><span>ENI Salaria Est</span><a href="https://maps.app.goo.gl/Wovzund9ZAKV7Tfa9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">08:30</div><div><strong>Partenza 🏍️💨</strong><span>Direzione Toscana - Romagna</span></div></div><div class="stop"><div class="time">10:00</div><div><strong>Sosta ☕🚻</strong><span>IP Fabro</span><a href="https://maps.app.goo.gl/5T7heowzCdXBGv6u5?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">10:15</div><div><strong>Ripartenza 🏍️💨</strong><span>Chi manca all’appello offre il caffè</span></div></div><div class="stop"><div class="time">12:00</div><div><strong>Sosta ⛽☕🚻</strong><span>IP Sesto Fiorentino</span><a href="https://maps.app.goo.gl/vtyx1FRMM7vtCkcb9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">12:30</div><div><strong>Ripartenza 🏍️💨</strong><span>Verso la Raticosa</span></div></div><div class="stop"><div class="time">13:30</div><div><strong>Pranzo 🥪📸</strong><span>Chalet Raticosa</span><a href="https://maps.app.goo.gl/MbXNtQ5D6Qpj1u4F6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">14:30</div><div><strong>Ripartenza 🏍️💨</strong><span>Con 2 kg in più e la stessa voglia di piegare</span></div></div><div class="stop"><div class="time">15:30</div><div><strong>Sosta ☕🚻</strong><span>Bar Renzo - Imola</span><a href="https://maps.app.goo.gl/xPZQj5hNbQjwLMQs7?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Ripartenza 🏍️💨</strong><span>Direzione Rimini</span></div></div><div class="stop"><div class="time">17:30</div><div><strong>Arrivo 🏁</strong><span>Hotel Vannucci - Rimini</span><a href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">20:30</div><div><strong>Cena 🌮🥗🍷</strong><span>Museo Nazionale del Motociclo</span><a href="https://maps.app.goo.gl/VutKovGwqkrmueR6A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
   <h2 class="section-title">📸 Da fotografare — Sabato 27/06</h2>
   <section class="photos">
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/960px-Raticosadamtbeni.jpg" alt="Passo della Raticosa" loading="lazy">
@@ -59,6 +182,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://www.meteosestola.it/webcam/futa/" target="_blank" class="photo-link">
             <img src="https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg" alt="Passo della Futa" loading="lazy">
@@ -70,6 +201,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/Category:Appennino_tosco-emiliano" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/960px-Raticosadamtbeni.jpg" alt="Appennino Tosco-Emiliano" loading="lazy">
@@ -83,22 +222,62 @@ main{max-width:980px;margin:0 auto;padding:14px}
         </section>
   <h2 class="section-title">🏍️ Per il biker — Sabato 27/06</h2>
   <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
-  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Trasferimento</div><h3>Fabro → Sesto Fiorentino</h3><p>Tratto lungo e scorrevole per macinare chilometri: ritmo regolare, attenzione a traffico e stanchezza.</p><a href="https://www.google.com/maps/dir/Fabro/Sesto+Fiorentino" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Curve</div><h3>Sesto Fiorentino → Raticosa</h3><p>Salita appenninica con curve, cambi di ritmo e paesaggio: uno dei tratti più interessanti del sabato.</p><a href="https://www.google.com/maps/dir/Sesto+Fiorentino/Passo+della+Raticosa" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Guidato</div><h3>Raticosa → Imola</h3><p>Discesa verso la Romagna: strada motociclistica, curve e tratti panoramici da affrontare senza fretta.</p><a href="https://www.google.com/maps/dir/Passo+della+Raticosa/Imola" target="_blank">Apri tratto su Google Maps</a></article></section>
+  <section class="biker-grid"><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Trasferimento</div><h3>Fabro → Sesto Fiorentino</h3><p>Tratto lungo e scorrevole per macinare chilometri: ritmo regolare, attenzione a traffico e stanchezza.</p><a href="https://www.google.com/maps/dir/Fabro/Sesto+Fiorentino" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Curve</div><h3>Sesto Fiorentino → Raticosa</h3><p>Salita appenninica con curve, cambi di ritmo e paesaggio: uno dei tratti più interessanti del sabato.</p><a href="https://www.google.com/maps/dir/Sesto+Fiorentino/Passo+della+Raticosa" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Guidato</div><h3>Raticosa → Imola</h3><p>Discesa verso la Romagna: strada motociclistica, curve e tratti panoramici da affrontare senza fretta.</p><a href="https://www.google.com/maps/dir/Passo+della+Raticosa/Imola" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
 
+<!-- ==========================================================
+     TAB DOMENICA
+     Qui puoi modificare:
+     - mappa domenica
+     - link percorso domenica
+     - programma domenica
+     - foto domenica
+     - punti biker domenica
+     ========================================================== -->
 <section id="domenica" class="day-panel">
   <section class="map-card">
+    <!-- MAPPA: modifica src per cambiare il percorso visualizzato nella mappa incorporata -->
     <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=44.1270,12.0640+to:43.9540,11.7030+to:44.1490,12.1360+to:43.9360,12.4470+to:44.0525,12.5890&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
   <section class="card">
     <h2>🏍️ Domenica 28/06 <span class="km">347 km</span></h2>
+    <!-- PULSANTE ROSSO PERCORSO: modifica href per cambiare il link Google Maps completo -->
     <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=Bar%20Sport%20Meldola%7CBar%20Il%20Muraglione%7CEsso%20Bertinoro%7CSan%20Marino&destination=Hotel%20Vannucci%20Rimini&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
     <div class="stop"><div class="time">09:00</div><div><strong>Ritrovo ☕</strong><span>Hotel Vannucci — verifica equipaggi e sopravvissuti alla sera precedente 😎</span></div></div><div class="stop"><div class="time">09:15</div><div><strong>Partenza 🏍️💨</strong><span>Direzione colline romagnole</span></div></div><div class="stop"><div class="time">10:15</div><div><strong>Sosta ☕🚻</strong><span>Bar Sport - Meldola</span><a href="https://maps.app.goo.gl/p5M6eXqr6TiQLMfm6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">12:00</div><div><strong>Pranzo 🥪📸☕🚻</strong><span>Bar Il Muraglione</span><a href="https://maps.app.goo.gl/KhPk4ePkSgTgGg46A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">14:30</div><div><strong>Sosta ⛽☕🚻</strong><span>Esso Bertinoro</span><a href="https://maps.app.goo.gl/5HxwfLD1LJjw9xqD9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Visita 📸</strong><span>San Marino — souvenir, calamite e acquisti indispensabili</span><a href="https://maps.app.goo.gl/gfk9AwMCeAyZUj6V7?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">20:00</div><div><strong>Cena 🍝</strong><span>Trattoria Da Renzi</span><a href="https://maps.app.goo.gl/97ySs3uvNuM7b327A?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
   <h2 class="section-title">📸 Da fotografare — Domenica 28/06</h2>
   <section class="photos">
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:Passo_del_Muraglione_(San_Godenzo)_01.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Passo_del_Muraglione_%28San_Godenzo%29_01.jpg/960px-Passo_del_Muraglione_%28San_Godenzo%29_01.jpg" alt="Passo del Muraglione" loading="lazy">
@@ -110,6 +289,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:Bertinoro_balcone_di_Romagna.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Bertinoro_balcone_di_Romagna.jpg/960px-Bertinoro_balcone_di_Romagna.jpg" alt="Bertinoro" loading="lazy">
@@ -121,6 +308,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_marino_guaita.jpg/960px-San_marino_guaita.jpg" alt="San Marino" loading="lazy">
@@ -134,22 +329,62 @@ main{max-width:980px;margin:0 auto;padding:14px}
         </section>
   <h2 class="section-title">🏍️ Per il biker — Domenica 28/06</h2>
   <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
-  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Tecnico</div><h3>Meldola → Muraglione</h3><p>Tratto appenninico da biker: curve, saliscendi e guida fluida di gruppo.</p><a href="https://www.google.com/maps/dir/Meldola/Passo+del+Muraglione" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Panoramico</div><h3>Muraglione → Bertinoro</h3><p>Rientro verso le colline romagnole: tratti vari, paesaggi aperti e guida piacevole.</p><a href="https://www.google.com/maps/dir/Passo+del+Muraglione/Bertinoro" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Turistico</div><h3>Bertinoro → San Marino</h3><p>Tratto più rilassato e panoramico, perfetto per arrivare alla visita senza stress.</p><a href="https://www.google.com/maps/dir/Bertinoro/San+Marino" target="_blank">Apri tratto su Google Maps</a></article></section>
+  <section class="biker-grid"><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Tecnico</div><h3>Meldola → Muraglione</h3><p>Tratto appenninico da biker: curve, saliscendi e guida fluida di gruppo.</p><a href="https://www.google.com/maps/dir/Meldola/Passo+del+Muraglione" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Panoramico</div><h3>Muraglione → Bertinoro</h3><p>Rientro verso le colline romagnole: tratti vari, paesaggi aperti e guida piacevole.</p><a href="https://www.google.com/maps/dir/Passo+del+Muraglione/Bertinoro" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Turistico</div><h3>Bertinoro → San Marino</h3><p>Tratto più rilassato e panoramico, perfetto per arrivare alla visita senza stress.</p><a href="https://www.google.com/maps/dir/Bertinoro/San+Marino" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
 
+<!-- ==========================================================
+     TAB LUNEDÌ
+     Qui puoi modificare:
+     - mappa lunedì
+     - link percorso lunedì
+     - programma lunedì
+     - foto lunedì
+     - punti biker lunedì
+     ========================================================== -->
 <section id="lunedi" class="day-panel">
   <section class="map-card">
+    <!-- MAPPA: modifica src per cambiare il percorso visualizzato nella mappa incorporata -->
     <div class="map-wrap"><iframe src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0525,12.5890&daddr=43.9670,12.6030+to:43.8990,12.7530+to:43.3540,12.5730+to:42.6900,12.5400+to:41.9954429,12.6659791&hl=it&output=embed" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     <div class="map-note">Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.</div>
   </section>
   <section class="card">
     <h2>🏁 Lunedì 29/06 <span class="km">314 km</span></h2>
+    <!-- PULSANTE ROSSO PERCORSO: modifica href per cambiare il link Google Maps completo -->
     <div class="day-buttons"><a class="mini-btn red" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Vannucci%20Rimini&waypoints=La%20Storia%20del%20Sic%20Coriano%7CVR46%20Store%20Tavullia%7CBar%20Contessa%20Gubbio%7CEsso%20E45%20Acquasparta&destination=ENI%20Salaria%20Ovest&travelmode=driving" target="_blank">Apri percorso del giorno in Google Maps</a></div>
     <div class="stop"><div class="time">09:15</div><div><strong>Ritrovo</strong><span>Hotel Vannucci — check-out fatto e moto carica</span></div></div><div class="stop"><div class="time">09:45</div><div><strong>Visita ❤️</strong><span>Museo “La Storia del Sic” - Coriano</span><a href="https://maps.app.goo.gl/B8vZxRnTpMWyVXty5?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">11:30</div><div><strong>Visita 📸☕🛍️</strong><span>VR46 Store - Tavullia — alleggerimento ufficiale del portafoglio</span><a href="https://maps.app.goo.gl/yMMkkLhLwAZRbcDp9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">13:30</div><div><strong>Pranzo 🥪☕🚻</strong><span>Bar Contessa - Gubbio</span><a href="https://maps.app.goo.gl/DNDMyGJBpbTtZsav6?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">16:00</div><div><strong>Sosta ⛽☕🚻</strong><span>Esso E45 Acquasparta</span><a href="https://maps.app.goo.gl/nZepBLPrvNNxD62U9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div><div class="stop"><div class="time">17:30</div><div><strong>Saluti finali 🤗⛽☕</strong><span>Eni Salaria Ovest — foto di gruppo, abbracci e promesse</span><a href="https://maps.app.goo.gl/pvAzHFiANMCDneZp9?g_st=ic" target="_blank">Apri su Google Maps</a></div></div>
   </section>
   <h2 class="section-title">📸 Da fotografare — Lunedì 29/06</h2>
   <section class="photos">
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://riviera.rimini.it/it/arte-cultura/monumenti-opere-darte-patrimonio-unesco/strutture-dataer/11709-museo-marco-simoncelli-la-storia-del-sic" target="_blank" class="photo-link">
             <img src="https://d13gisi6iet4nc.cloudfront.net/odm-prev/p%2Crn%2C2022%2Ccoriano%2Cmuseo_marco_simoncelli_la_storia_del_sic%2Cd%2C37369%2Cautore_sconosciuto.jpg" alt="Marco Simoncelli" loading="lazy">
@@ -161,6 +396,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:Tavullia.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Tavullia.jpg/960px-Tavullia.jpg" alt="Tavullia" loading="lazy">
@@ -172,6 +415,14 @@ main{max-width:980px;margin:0 auto;padding:14px}
           </div>
         </article>
         
+        <!-- FOTO "DA FOTOGRAFARE"
+          Per cambiare questa scheda modifica:
+          - href del tag <a>: link foto originale
+          - src del tag <img>: immagine visualizzata
+          - alt: descrizione breve immagine
+          - h3: titolo visibile
+          - p: descrizione visibile
+     -->
         <article class="photo-card">
           <a href="https://commons.wikimedia.org/wiki/File:Gubbio,_panorama_01.jpg" target="_blank" class="photo-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Gubbio%2C_panorama_01.jpg/960px-Gubbio%2C_panorama_01.jpg" alt="Gubbio" loading="lazy">
@@ -185,10 +436,38 @@ main{max-width:980px;margin:0 auto;padding:14px}
         </section>
   <h2 class="section-title">🏍️ Per il biker — Lunedì 29/06</h2>
   <p class="biker-note">Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada e alle tue capacità.</p>
-  <section class="biker-grid"><article class="biker-card"><div class="biker-tag">Emotivo</div><h3>Rimini → Coriano</h3><p>Tappa breve ma simbolica verso il museo dedicato al Sic.</p><a href="https://www.google.com/maps/dir/Rimini/La+Storia+del+Sic+Coriano" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Iconico</div><h3>Coriano → Tavullia</h3><p>Tratto breve, ma molto motociclistico per significato: dalla memoria del Sic al mondo VR46.</p><a href="https://www.google.com/maps/dir/Coriano/Tavullia" target="_blank">Apri tratto su Google Maps</a></article><article class="biker-card"><div class="biker-tag">Scorrevole</div><h3>Tavullia → Gubbio</h3><p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p><a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a></article></section>
+  <section class="biker-grid"><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Emotivo</div><h3>Rimini → Coriano</h3><p>Tappa breve ma simbolica verso il museo dedicato al Sic.</p><a href="https://www.google.com/maps/dir/Rimini/La+Storia+del+Sic+Coriano" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Iconico</div><h3>Coriano → Tavullia</h3><p>Tratto breve, ma molto motociclistico per significato: dalla memoria del Sic al mondo VR46.</p><a href="https://www.google.com/maps/dir/Coriano/Tavullia" target="_blank">Apri tratto su Google Maps</a></article><!-- PUNTO "PER IL BIKER"
+          Per cambiare questa scheda modifica:
+          - biker-tag: etichetta piccola
+          - h3: nome tratto
+          - p: descrizione tratto
+          - href: link Google Maps del tratto
+     -->
+        <article class="biker-card"><div class="biker-tag">Scorrevole</div><h3>Tavullia → Gubbio</h3><p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p><a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
 <div class="footer-space"></div></main>
+<!-- ==========================================================
+     SCRIPT FUNZIONAMENTO TAB
+     Serve per far aprire Generale, Sabato, Domenica e Lunedì.
+     Serve anche per fare funzionare il pulsante blu "Informazioni".
+
+     Non modificarlo se non aggiungi o rinomini i tab.
+     ========================================================== -->
 <script>
 const buttons = document.querySelectorAll('.tab-button');
 const panels = document.querySelectorAll('.day-panel');
