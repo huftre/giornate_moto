@@ -621,7 +621,8 @@ main{max-width:980px;margin:0 auto;padding:14px}
         <article class="biker-card"><div class="biker-tag">Scorrevole</div><h3>Tavullia → Gubbio</h3><p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p><a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a></article></section>
 </section>
 
-<div class="footer-space"></div></main>
+<div class="footer-space"></div>
+</main>
 <!-- ==========================================================
      SCRIPT FUNZIONAMENTO TAB
      Serve per far aprire Generale, Sabato, Domenica e Lunedì.
@@ -630,35 +631,41 @@ main{max-width:980px;margin:0 auto;padding:14px}
      Non modificarlo se non aggiungi o rinomini i tab.
      ========================================================== -->
 <script>
-const buttons = document.querySelectorAll('.tab-button');
-const panels = document.querySelectorAll('.day-panel');
+    const buttons = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.day-panel');
 
-function activateTab(tab) {
-  buttons.forEach(b => b.classList.remove('active'));
-  panels.forEach(p => p.classList.remove('active'));
+    function activateTab(tab) {
+      buttons.forEach(button => button.classList.remove('active'));
+      panels.forEach(panel => panel.classList.remove('active'));
 
-  const selectedButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
-  const selectedPanel = document.getElementById(tab);
+      const selectedButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
+      const selectedPanel = document.getElementById(tab);
 
-  if (selectedButton && selectedPanel) {
-    selectedButton.classList.add('active');
-    selectedPanel.classList.add('active');
-    window.scrollTo({ top: document.getElementById('programma').offsetTop, behavior: 'smooth' });
-  }
-}
+      if (selectedButton && selectedPanel) {
+        selectedButton.classList.add('active');
+        selectedPanel.classList.add('active');
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    activateTab(button.dataset.tab);
-  });
-});
+        window.scrollTo({
+          top: document.getElementById('programma').offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
 
-const infoButton = document.getElementById('infoButton');
-if (infoButton) {
-  infoButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    activateTab('generale');
-  });
-}
-</script>
-</body></html>
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        activateTab(button.dataset.tab);
+      });
+    });
+
+    const infoButton = document.getElementById('infoButton');
+
+    if (infoButton) {
+      infoButton.addEventListener('click', event => {
+        event.preventDefault();
+        activateTab('generale');
+      });
+    }
+  </script>
+</body>
+</html>
