@@ -60,10 +60,13 @@
       line-height: 1.45;
     }
 
-    /* Riga sotto il titolo: frase a sinistra e logo motoclub a destra */
+    /* Riga sotto il titolo: frase a sinistra e logo motoclub a destra.
+       Su iPhone il logo resta accanto alla frase.
+       Su desktop viene riposizionato al centro dell'header con il media query sotto. */
     .hero-subtitle-row {
+      position: relative;
       margin-top: 12px;
-      padding-right: 105px; /* spazio per non far andare la frase sotto al logo */
+      padding-right: 92px; /* spazio per non far andare la frase sotto al logo su mobile */
     }
 
     .hero-subtitle-row .subtitle {
@@ -72,13 +75,15 @@
 
     .hero-logo {
       position: absolute;
-      right: 18px;
-      bottom: 28px;
-      width: 90px;
-      height: 90px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 72px;
+      height: 72px;
       object-fit: contain;
       border-radius: 50%;
       filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45));
+      z-index: 2;
     }
 
     .buttons {
@@ -464,6 +469,22 @@
         font-size: 52px;
       }
 
+      /* Logo desktop: più grande, centrato nell'header e non attaccato al bordo destro */
+      .hero-subtitle-row {
+        position: static;
+        padding-right: 0;
+        max-width: 760px;
+      }
+
+      .hero-logo {
+        top: 50%;
+        right: clamp(95px, 8vw, 165px);
+        transform: translateY(-50%);
+        width: 140px;
+        height: 140px;
+      }
+
+
       .buttons {
         flex-direction: row;
       }
@@ -512,16 +533,20 @@
         font-size: 35px;
       }
 
+      /* Logo iPhone: sulla stessa riga del sottotitolo, a destra e più piccolo */
       .hero-subtitle-row {
-        padding-right: 82px;
-     }
+        position: relative;
+        padding-right: 84px;
+      }
 
-     .hero-logo {
-      right: 14px;
-      bottom: 30px;
-      width: 90px;
-      height: 90px;
-    }
+      .hero-logo {
+        right: 0;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: 68px;
+        height: 68px;
+      }
 
       .map-wrap {
         height: 360px;
