@@ -123,7 +123,7 @@
       top: 0;
       z-index: 20;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 7px;
       background: rgba(243, 244, 246, .96);
       backdrop-filter: blur(10px);
@@ -610,6 +610,7 @@
   <main id="programma">
     <nav class="tabbar">
       <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
+      <button class="tab-button" data-tab="checklist">Check list<br><small>Partenza</small></button>
       <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
       <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
       <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
@@ -717,6 +718,80 @@
         <div class="warning">
           🏁 L’obiettivo non è arrivare primi, ma arrivare tutti insieme e divertirci. 🍝🏍️😎✌️
         </div>
+      </section>
+    </section>
+
+
+    <section id="checklist" class="day-panel">
+      <section class="mission-card">
+        <h2>✅ Checklist prima di partire</h2>
+
+        <ul>
+          <li>Pressione gomme controllata</li>
+          <li>Livello olio e liquidi ok</li>
+          <li>Documenti moto e patente</li>
+          <li>Assicurazione e revisione in regola</li>
+          <li>Antipioggia nello zaino</li>
+          <li>Powerbank / caricatore telefono</li>
+          <li>Interfono carico</li>
+          <li>Pieno fatto prima del ritrovo</li>
+        </ul>
+      </section>
+
+      <section class="mission-card">
+        <h2>☎️ Numeri utili</h2>
+
+        <ul>
+          <li>Emergenza: 112</li>
+          <li>Soccorso stradale: da inserire</li>
+          <li>Referente gruppo: da inserire</li>
+          <li>Hotel Vannucci: da inserire</li>
+        </ul>
+      </section>
+
+      <section class="mission-card">
+        <h2>🎒 Cosa portare</h2>
+
+        <ul>
+          <li>Antipioggia</li>
+          <li>Guanti di ricambio</li>
+          <li>Felpa o sottogiacca leggero</li>
+          <li>Acqua</li>
+          <li>Occhiali da sole</li>
+          <li>Kit riparazione gomme / bombolette</li>
+          <li>Caricatore telefono</li>
+        </ul>
+      </section>
+
+      <section class="mission-card">
+        <h2>📄 Programma PDF</h2>
+
+        <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
+          Qui puoi inserire il PDF del programma, se in futuro vuoi farlo scaricare al gruppo.
+        </p>
+
+        <!--
+          PULSANTE PDF DISATTIVATO
+          Per attivarlo:
+          1. carica un file chiamato programma.pdf nella stessa cartella di index.html
+          2. togli i commenti da questo blocco
+
+          <a class="mini-btn red" href="programma.pdf" target="_blank">
+            Scarica programma PDF
+          </a>
+        -->
+
+        <div class="warning">
+          PDF non ancora disponibile.
+        </div>
+      </section>
+
+      <section class="mission-card">
+        <h2>🕒 Ultimo aggiornamento</h2>
+
+        <p style="color: #6b7280; line-height: 1.45;">
+          Pagina aggiornata il 18/06/2026. Controlla sempre eventuali modifiche prima della partenza.
+        </p>
       </section>
     </section>
 
