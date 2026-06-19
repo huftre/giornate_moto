@@ -468,8 +468,45 @@
       line-height: 1.35;
       text-transform: uppercase;
     }
-.footer-space {
-      height: 18px;
+    
+    /* Pulsante fisso "torna in alto" */
+    .back-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  z-index: 99;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(17, 24, 39, .88);
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .82;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+}
+
+/* Su iPhone resta piccolo e non copre troppo */
+@media (max-width: 430px) {
+  .back-to-top {
+    right: 12px;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+      .footer-space {
+        height: 18px;
     }
 
     @media (min-width: 800px) {
@@ -1872,7 +1909,12 @@
 
     <div class="footer-space"></div>
   </main>
-
+  
+<!-- Pulsante fisso per tornare in alto -->
+<button class="back-to-top" type="button" onclick="tornaInAlto()" aria-label="Torna in alto">
+  🔝
+</button>
+  
   <script>
     const buttons = document.querySelectorAll('.tab-button');
     const panels = document.querySelectorAll('.day-panel');
@@ -2085,6 +2127,14 @@ if (programmaButton) {
       finestra.print();
     };
   }
+
+  function tornaInAlto() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}  
+    
 </script>
 </body>
 </html>
