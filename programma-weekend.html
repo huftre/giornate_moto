@@ -1,0 +1,2318 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TOSCANA - ROMAGNA</title>
+
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --text: #111827;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --border: #e5e7eb;
+      --orange: #ea580c;
+      --green: #15803d;
+      --dark: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      padding: 44px 18px 34px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(17, 24, 39, .60), rgba(31, 41, 55, .40)),
+        url("https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      line-height: 1.05;
+      margin: 0;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .hero .subtitle {
+      margin: 12px 0 0;
+      color: #e5e7eb;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    /* Riga sotto il titolo: frase a sinistra e logo motoclub a destra.
+       Su iPhone il logo resta accanto alla frase.
+       Su desktop viene riposizionato al centro dell'header con il media query sotto. */
+    .hero-subtitle-row {
+      position: relative;
+      margin-top: 12px;
+      padding-right: 92px; /* spazio per non far andare la frase sotto al logo su mobile */
+    }
+
+    .hero-subtitle-row .subtitle {
+      margin: 0;
+    }
+
+    .hero-logo {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45));
+      z-index: 2;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      padding: 17px 16px;
+      border-radius: 16px;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .btn.red {
+      background: var(--red);
+    }
+
+    .btn.blue {
+      background: var(--blue);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    /* Barra tab scorrevole: utile quando i tab sono tanti su iPhone */
+    .tabbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      background: rgba(243, 244, 246, .96);
+      backdrop-filter: blur(10px);
+      padding: 10px 0 12px;
+      margin-bottom: 8px;
+    }
+
+    /* Nasconde la barra di scorrimento su Chrome/Safari */
+    .tabbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-button {
+      flex: 0 0 auto;
+      min-width: 128px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+      border-radius: 15px;
+      padding: 11px 12px;
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .05);
+    }
+
+    .tab-button small {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .tab-button.active {
+      background: var(--dark);
+      color: white;
+      border-color: var(--dark);
+    }
+
+    .tab-button.active small {
+      color: #d1d5db;
+    }
+
+    .day-panel {
+      display: none;
+    }
+
+    .day-panel.active {
+      display: block;
+    }
+
+    .map-card,
+    .card,
+    .photo-card,
+    .biker-card,
+    .rules-card,
+    .mission-card {
+      background: var(--card);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+      border: 1px solid rgba(0, 0, 0, .05);
+      margin-bottom: 18px;
+    }
+
+    .map-wrap {
+      width: 100%;
+      height: 420px;
+      background: #e5e7eb;
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .map-note {
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .card,
+    .mission-card,
+    .rules-card {
+      padding: 18px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .km {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--muted);
+      background: #f3f4f6;
+      padding: 6px 10px;
+      border-radius: 999px;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
+    .day-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mini-btn {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      background: var(--blue);
+      color: white;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-weight: 900;
+    }
+
+    .mini-btn.red {
+      background: var(--red);
+    }
+
+    .stop {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .stop:last-child {
+      border-bottom: none;
+    }
+
+    .time {
+      min-height: 54px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #111827, #374151);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .stop-content strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .stop-info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .stop-info-row span {
+      flex: 1;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .maps-link {
+      display: inline-block;
+      margin-top: 7px;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .weather-btn {
+      flex: 0 0 auto;
+      color: #ffffff !important;
+      background: #0ea5e9;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .warning {
+      margin-top: 14px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #7c2d12;
+      border-radius: 16px;
+      padding: 14px;
+      line-height: 1.35;
+    }
+
+    .mission-card ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .mission-card li {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    .photos,
+    .biker-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .section-title {
+      margin: 24px 0 12px;
+      font-size: 25px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .photo-link {
+      display: block;
+      height: 240px;
+      background: #dbeafe;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .photo-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-body,
+    .biker-card {
+      padding: 16px 18px 18px;
+    }
+
+    .photo-body h3,
+    .biker-card h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .photo-body p,
+    .biker-card p {
+      margin: 0 0 14px;
+      color: #4b5563;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .photo-body a,
+    .biker-card a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .biker-card {
+      position: relative;
+      border-left: 6px solid var(--orange);
+    }
+
+    .biker-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .biker-note {
+      margin: 0 0 18px;
+      color: #6b7280;
+      font-size: 15px;
+      line-height: 1.45;
+      font-style: italic;
+    }
+
+    .rules-card {
+      border-left: 6px solid var(--green);
+    }
+
+    .rule-block {
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .rule-block:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .rule-block h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .rule-block ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .rule-block li {
+      margin: 8px 0;
+      line-height: 1.4;
+      color: #374151;
+    }
+
+    .final-warning {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      color: #7f1d1d;
+      font-weight: 900;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+    
+    /* Pulsante fisso "torna in alto" */
+    .back-to-top {
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  z-index: 99;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(17, 24, 39, .88);
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .82;
+}
+
+.back-to-top:hover {
+  opacity: 1;
+}
+
+/* Su iPhone resta piccolo e non copre troppo */
+@media (max-width: 430px) {
+  .back-to-top {
+    right: 12px;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+      .footer-space {
+        height: 18px;
+    }
+
+    @media (min-width: 800px) {
+      .hero {
+        padding: 52px 30px 42px;
+      }
+
+      .hero h1 {
+        font-size: 52px;
+      }
+
+      /* Logo desktop: più grande, centrato nell'header e non attaccato al bordo destro */
+      .hero-subtitle-row {
+        position: static;
+        padding-right: 0;
+        max-width: 760px;
+      }
+
+      .hero-logo {
+        top: 50%;
+        right: clamp(95px, 8vw, 165px);
+        transform: translateY(-50%);
+        width: 140px;
+        height: 140px;
+      }
+
+
+      .buttons {
+        flex-direction: row;
+      }
+
+      .btn {
+        width: auto;
+        min-width: 280px;
+      }
+
+      .map-wrap {
+        height: 520px;
+      }
+
+      .photos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .biker-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .photo-link {
+        height: 190px;
+      }
+
+      .day-buttons {
+        flex-direction: row;
+      }
+
+      .mini-btn {
+        width: auto;
+        min-width: 260px;
+      }
+
+      .cost-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 430px) {
+      main {
+        padding: 12px 10px;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .hero h1 {
+        font-size: 35px;
+      }
+
+      /* Logo iPhone: sulla stessa riga del sottotitolo, a destra e più piccolo */
+      .hero-subtitle-row {
+        position: relative;
+        padding-right: 84px;
+      }
+
+      .hero-logo {
+        right: 0;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        width: 68px;
+        height: 68px;
+      }
+
+      .map-wrap {
+        height: 360px;
+      }
+
+      .photo-link {
+        height: 225px;
+      }
+
+      .stop {
+        grid-template-columns: 78px 1fr;
+      }
+
+      .time {
+        font-size: 15px;
+      }
+
+      .weather-btn {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+
+      /* Tab mobile: restano leggibili e scorrono orizzontalmente */
+      .tabbar {
+        gap: 8px;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .tab-button {
+        min-width: 118px;
+        font-size: 12px;
+        padding: 10px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <h1>TOSCANA - ROMAGNA</h1>
+
+    <div class="hero-subtitle-row">
+  <p class="subtitle">
+    Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo,
+    risate assicurate, tante curve e zero fretta.
+  </p>
+
+  <!-- LOGO MOTO CLUB
+       Per cambiare immagine, modifica solo il valore src=""
+       Esempio:
+       src="assets/logo-motoclub.png"
+  -->
+  <img
+    class="hero-logo"
+    src="assets/logo-motoclub.png"
+    alt="Logo Uscite in Moto Roma e Provincia">
+</div>
+
+    <div class="buttons">
+  <a class="btn red" href="#sabato" id="programmaButton">
+    Vai al programma
+  </a>
+
+  <!-- 
+    PULSANTE INFORMAZIONI DISATTIVATO
+    Lo tengo nel codice perché potrebbe servire in futuro.
+
+    <a class="btn blue" href="#generale" id="infoButton">Informazioni</a>
+  -->
+</div>
+  </section>
+
+  <main id="programma">
+    <nav class="tabbar">
+      <button class="tab-button active" data-tab="generale">Generale<br><small>Regolamento</small></button>
+      <button class="tab-button" data-tab="checklist">Checklist<br><small>Partenza</small></button>
+      <button class="tab-button" data-tab="costi">Costi<br><small>Weekend</small></button>
+      <button class="tab-button" data-tab="social">Social<br><small>Sondaggi</small></button>
+      <button class="tab-button" data-tab="sabato">Sabato<br><small>27/06</small></button>
+      <button class="tab-button" data-tab="domenica">Domenica<br><small>28/06</small></button>
+      <button class="tab-button" data-tab="lunedi">Lunedì<br><small>29/06</small></button>
+    </nav>
+
+    <section id="generale" class="day-panel active">
+      <section class="mission-card">
+        <h2>👀 Visite</h2>
+
+        <div style="text-align: center; padding: 10px 0;">
+          <img
+            src="https://api.visitorbadge.io/api/visitors?path=huftre.github.io%2Fmoto_romagna&label=VISITE&countColor=%232563eb"
+            alt="Contatore visite"
+            style="max-width: 100%; height: auto;">
+        </div>
+      </section>
+
+      <section class="mission-card">
+        <h2>🏆 Missione del weekend</h2>
+
+        <ul>
+          <li>✅ 1.148 km di strada</li>
+          <li>✅ Curve spettacolari</li>
+          <li>✅ Buona compagnia</li>
+          <li>✅ Ottimo cibo</li>
+          <li>✅ Tante risate</li>
+          <li>❌ Dieta</li>
+          <li>❌ Risparmio carburante</li>
+          <li>❌ Andare a letto presto</li>
+        </ul>
+
+        <div class="final-warning">
+          DB Killer montato e scarichi in regola: meglio perdere 2 minuti prima della partenza che qualche euro in Romagna 😎🏍️💸
+        </div>
+        
+        <div class="warning">
+          Ci vediamo sabato 27/06 con il pieno fatto, moto in ordine e tanta voglia di divertirci! 😎🏍️🍻
+        </div>
+      </section>
+
+      <h2 class="section-title">📌 Regolamento</h2>
+
+      <section class="rules-card">
+        <div class="rule-block">
+          <h3>✅ Regole di base</h3>
+          <ul>
+            <li>Gli organizzatori non si assumono responsabilità per incidenti, danni a persone o cose, violazioni del Codice della Strada o comportamenti imprudenti.</li>
+            <li>Ognuno partecipa volontariamente ed è responsabile di sé stesso, della propria moto e delle proprie decisioni.</li>
+            <li>La sicurezza viene prima della fretta: non stiamo facendo qualifiche, stiamo andando a divertirci.</li>
+            <li>Nessuno deve sentirsi obbligato a tenere un ritmo superiore alle proprie capacità.</li>
+          </ul>
+        </div>
+
+        <div class="rule-block">
+          <h3>🏍️ Formazione</h3>
+          <ul>
+            <li>Apripista che non va superato.</li>
+            <li>Staffette libere di muoversi nel gruppo: tenere la destra e lasciare spazio.</li>
+            <li>Scopetta che chiude la fila e assiste chi resta indietro.</li>
+          </ul>
+        </div>
+
+        <div class="rule-block">
+          <h3>🚦 Durante la guida</h3>
+          <ul>
+            <li>Mantenere sempre una distanza di sicurezza adeguata.</li>
+            <li>Evitare sorpassi all’interno del gruppo salvo necessità.</li>
+            <li>Guidare in modo fluido e prevedibile.</li>
+            <li>Segnalare ostacoli e situazioni particolari agli altri motociclisti.</li>
+            <li>Restare ordinati e tendenzialmente sulla destra.</li>
+          </ul>
+        </div>
+
+        <div class="rule-block">
+          <h3>📍 Se ci si separa dal gruppo</h3>
+          <ul>
+            <li>Niente rincorse.</li>
+            <li>Raggiungere il successivo punto concordato con il proprio passo.</li>
+            <li>Il gruppo si ricompatta nei punti stabiliti.</li>
+          </ul>
+        </div>
+
+        <div class="rule-block">
+          <h3>🤝 Rispetto</h3>
+          <ul>
+            <li>Per tutti gli utenti della strada.</li>
+            <li>Per chi ha meno esperienza.</li>
+            <li>Per chi ha più esperienza ma mantiene il proprio passo.</li>
+            <li>Collaborazione e spirito di gruppo sempre.</li>
+          </ul>
+        </div>
+
+        <div class="rule-block">
+          <h3>🚫 Non sono ammessi</h3>
+          <ul>
+            <li>Sorpassi rischiosi.</li>
+            <li>Impennate o stunt.</li>
+            <li>Gare tra partecipanti.</li>
+            <li>Guida sotto effetto di alcol o sostanze.</li>
+            <li>Comportamenti che possano mettere in difficoltà il gruppo.</li>
+          </ul>
+        </div>
+
+        <div class="final-warning">
+          Gli organizzatori possono allontanare chi compromette la sicurezza o la serenità dell’uscita.
+        </div>
+
+        <div class="warning">
+          🏁 L’obiettivo non è arrivare primi, ma arrivare tutti insieme e divertirci. 🍝🏍️😎✌️
+        </div>
+      </section>
+    </section>
+
+
+    <section id="checklist" class="day-panel">
+      <section class="mission-card">
+  <h2>✅🎒 Checklist prima di partire</h2>
+
+  <h3>🏍️🔧 Moto pronta</h3>
+
+  <ul>
+    <li>🛞 Pressione gomme controllata</li>
+    <li>🛢️ Livello olio e liquidi ok</li>
+    <li>⛓️ Catena controllata e lubrificata, se presente</li>
+    <li>💡 Luci, frecce e stop funzionanti</li>
+    <li>📄 Assicurazione e revisione in regola</li>
+    <li>⛽ Pieno fatto prima del ritrovo</li>
+    <li>🔇 DB Killer montato e scarichi in regola 😎🏍️💸</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🪪💳 Documenti e soldi</h3>
+
+  <ul>
+    <li>🪪 Patente</li>
+    <li>🆔 Carta d’identità</li>
+    <li>🏥 Tessera sanitaria</li>
+    <li>📄 Documenti moto</li>
+    <li>💳 Bancomat / carta</li>
+    <li>💶 Un po’ di contanti</li>
+    <li>🔑 Chiavi moto</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>📱🔋 Elettronica</h3>
+
+  <ul>
+    <li>📱 Telefono carico</li>
+    <li>🔌 Caricatore telefono</li>
+    <li>🔗 Cavo USB</li>
+    <li>🔋 Powerbank carico</li>
+    <li>🎧 Interfono carico</li>
+    <li>🔌 Caricatore interfono, se necessario</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🧥🛡️ Abbigliamento tecnico</h3>
+
+  <ul>
+    <li>🧥 Giacca tecnica estiva / traforata</li>
+    <li>🛡️ Paraschiena</li>
+    <li>🧤 Guanti estivi</li>
+    <li>🧤 Guanti di ricambio</li>
+    <li>🥷 Sottocasco o bandana</li>
+    <li>🧣 Scaldacollo leggero</li>
+    <li>🕶️ Occhiali da sole</li>
+    <li>🌧️ Antipioggia completo</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>☀️🌦️ Caldo e possibile temporale</h3>
+
+  <ul>
+    <li>🌧️ Antipioggia facile da prendere, non sepolto in fondo allo zaino</li>
+    <li>💧 Sacchetto impermeabile per telefono e documenti</li>
+    <li>🚰 Bottiglietta d’acqua</li>
+    <li>🧴 Crema solare piccola</li>
+    <li>💋 Stick labbra</li>
+    <li>🧢 Cappellino per quando si scende dalla moto</li>
+    <li>🧻 Salviettine umidificate</li>
+    <li>🪟 Panno microfibra per casco e visiera</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🧼💊 Igiene e farmacia</h3>
+
+  <ul>
+    <li>🪥 Spazzolino</li>
+    <li>🦷 Dentifricio piccolo</li>
+    <li>🧴 Deodorante</li>
+    <li>💊 Farmaci personali</li>
+    <li>🩹 Cerotti</li>
+    <li>💊 Antidolorifico</li>
+    <li>🍽️ Qualcosa per stomaco / digestione, viste le cene 😅</li>
+    <li>🤧 Fazzoletti</li>
+  </ul>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🛠️🎒 Extra utili</h3>
+
+  <ul>
+    <li>🛞 Kit riparazione gomme / bomboletta, se disponibile</li>
+    <li>🧷 Fascette da elettricista</li>
+    <li>🩹 Nastro americano piccolo</li>
+    <li>🔦 Mini torcia</li>
+    <li>🧤 Guanti monouso</li>
+    <li>🍫 Snack / barretta</li>
+    <li>🧂 Sali minerali</li>
+    <li>😴 Tappi per dormire, nel caso parta il campionato mondiale di russata 😂</li>
+    <li>🛍️ Sacchetto vuoto per roba sporca o bagnata</li>
+  </ul>
+
+  <div class="warning">
+    🎒 Consiglio pratico: tieni sopra nello zaino 🌧️ antipioggia, 🪪 documenti, 🚰 acqua e 🔋 powerbank.
+    <br><br>
+    Se arriva il temporale estivo, non è il momento di fare archeologia tra mutande e caricabatterie 😎🌦️🏍️
+  </div>
+</section>
+
+      <section class="mission-card">
+        <h2>☎️ Numeri utili</h2>
+
+        <ul>
+          <li>Emergenza: 112</li>
+          <li>Referente gruppo: Paola +393347916829</li>
+          <li>Hotel Vannucci: +3905411792387</li>
+        </ul>
+      </section>
+
+     <section class="mission-card">
+  <h2>📄 Programma PDF</h2>
+
+  <button type="button" class="mini-btn red" onclick="stampaProgrammaPDF()">
+    Scarica / Stampa programma PDF
+  </button>
+
+  <!--
+    MESSAGGIO PDF DISATTIVATO
+    Lo tengo nel codice perché potrebbe servire se vuoi togliere il pulsante in futuro.
+
+    <div class="warning">
+      PDF non disponibile.
+    </div>
+  -->
+</section>
+
+      <section class="mission-card">
+        <h2>🕒 Ultimo aggiornamento</h2>
+
+        <p style="color: #6b7280; line-height: 1.45;">
+          Pagina aggiornata il 26/06/2026. Controlla sempre eventuali modifiche prima della partenza.
+        </p>
+      </section>
+    </section>
+
+
+    <section id="costi" class="day-panel">
+      <section class="mission-card">
+        <h2>💰 Costi weekend</h2>
+
+        <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
+          Riepilogo dei costi del weekend Toscana-Romagna: qui trovi i prezzi già confermati dei posti prenotati e delle voci principali.
+<br><br>
+Per tutto ciò che non è indicato con un prezzo fisso — pranzi liberi, caffè, benzina, snack, souvenir e tentazioni varie — ognuno provvede per sé in base a quello che prende. 
+          Traduzione: libertà assoluta, ma portafoglio personale 😎💸
+        </p>
+
+       </section>
+
+   <section class="mission-card">
+  <h2>🥪 Pranzi</h2>
+
+  <h3>🏔️ Sabato 27/06 – Chalet Raticosa</h3>
+
+  <ul>
+    <li>Pranzo libero, non programmato e non prenotato</li>
+    <li>Disponibilità in base al momento</li>
+    <li>Possibili opzioni: panini, tramezzini, snack, bevande e quello che troviamo sul posto</li>
+  </ul>
+
+  <div class="warning">
+    💰 Prezzo variabile in base a quello che ognuno prende.
+    <br><br>
+    Traduzione pratica: ognuno ordina, mangia e paga il suo 😎🥪
+  </div>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🏔️ Domenica 28/06 – Bar Il Muraglione</h3>
+
+  <ul>
+    <li>Pranzo libero, non programmato e non prenotato</li>
+    <li>Disponibilità in base al momento</li>
+    <li>Possibili opzioni: panini, tramezzini, snack, bevande e quello che troviamo sul posto</li>
+  </ul>
+
+  <div class="warning">
+    💰 Prezzo variabile in base a quello che ognuno prende.
+    <br><br>
+    Anche qui modalità libera: niente menù fisso, niente complicazioni, solo fame e curve 😄🏍️
+  </div>
+
+ <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+ <h3>🏔️ Lunedi 29/06 – Bar Contessa</h3>
+
+  <ul>
+    <li>Pranzo libero, non programmato e non prenotato</li>
+    <li>Disponibilità in base al momento</li>
+    <li>Possibili opzioni: panini, tramezzini, snack, bevande e quello che troviamo sul posto</li>
+  </ul>
+
+  <div class="warning">
+    💰 Prezzo variabile in base a quello che ognuno prende.
+    <br><br>
+    Anche qui modalità libera: magari qualcosa di leggero...per sciacquare l'intero weekend 😄🏍️
+  </div>    
+
+</section>
+
+<section class="mission-card">
+  <h2>🍷 Cene</h2>
+
+  <h3>🔥 Sabato 27/06 – Trattoria Renzi 🍝🍖🔥</h3>
+
+  <ul>
+    <li>🍜 Tagliatelle</li>
+    <li>🥩 Carne alla brace</li>
+    <li>🥗 Insalata</li>
+    <li>🍟 Patatine</li>
+    <li>🥙 Piadina</li>
+    <li>💧 Acqua e 🍷 vino</li>
+    <li>🥃 Digestivo</li>
+    <li>☕ Caffè</li>
+    <li>🍰 Dolci della casa</li>
+  </ul>
+
+  <div class="price-line" style="margin-top: 24px;">
+    💰 25,00 €
+  </div>
+
+  <hr style="border:0; border-top:1px solid var(--border); margin:18px 0;">
+
+  <h3>🔥 Domenica 28/06 – MotoClub / Museo di Rimini 🏍️🏁</h3>
+
+  <ul>
+    <li>🥓 Antipasto di affettati</li>
+    <li>🥙 Piadina con carne alla brace e insalata 🥩🥗</li>
+    <li>💧 Acqua e 🍷 vino</li>
+  </ul>
+
+  <div class="price-line" style="margin-top: 24px;">
+    💰 15,00 €
+  </div>
+</section>
+
+<section class="mission-card">
+  <h2>🏨 Quote fisse</h2>
+
+  <ul>
+    <li>
+      Hotel Vannucci
+      <ul>
+        <li>Camera singola: <strong>105,00 €</strong></li>
+        <li>Camera doppia: <strong>140,00 €</strong></li>
+        <li>Camera matrimoniale: <strong>140,00 €</strong></li>
+        <li>Camera tripla: <strong>170,00 €</strong></li>
+      </ul>
+    </li>
+
+    <li>
+      Tassa di soggiorno
+      <ul>
+        <li><strong>2,50 €</strong> a persona al giorno</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<!-- 
+  RIQUADRO "VARIE" MOMENTANEAMENTE DISATTIVATO
+  Lo tengo nel codice perché potrebbe servire in futuro.
+
+  <section class="mission-card">
+    <h2>⛽ Varie</h2>
+
+    <ul>
+      <li>Benzina: variabile in base alla moto e allo stile di guida</li>
+      <li>Pedaggi: da verificare in base al percorso scelto</li>
+      <li>Caffè extra: inevitabili</li>
+      <li>Souvenir / calamite / magliette: responsabilità personale 😂</li>
+    </ul>
+  </section>
+-->
+    </section>
+
+    <section id="social" class="day-panel">
+      <section class="mission-card">
+        <h2>💬 Gruppo Whatsapp</h2>
+
+        <div style="text-align: center; padding: 10px 0;">
+          <a
+            href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0"
+            target="_blank"
+            style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp"
+              style="width: 70px; height: 70px;">
+
+            <span>Entra nel gruppo dedicato</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="mission-card">
+        <h2>📊 Sondaggio</h2>
+
+        <p style="color: #6b7280; line-height: 1.45; margin-bottom: 16px;">
+          Il sondaggio verrà gestito direttamente nella chat WhatsApp del gruppo.
+        </p>
+
+        <!-- Pulsante sondaggio WhatsApp: per cambiare destinazione modifica solo href="". Per tasto non cliccabile inserire "javascript:void(0)" -->
+        <div style="text-align: center; padding: 10px 0;">
+          <a
+              href="javascript:void(0)"
+              style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+              alt="WhatsApp"
+              style="width: 70px; height: 70px;">
+
+            <span>Attualmente non sono presenti sondaggi attivi</span>
+          </a>
+        </div>
+      </section>
+<section class="mission-card">
+  <h2>📘 Gruppo Facebook</h2>
+
+  <div style="text-align: center; padding: 10px 0;">
+    <a
+      href="https://www.facebook.com/share/g/1JEknbBSzM/?mibextid=wwXIfr"
+      target="_blank"
+      style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+        alt="Facebook"
+        style="width: 70px; height: 70px;">
+
+      <span>Clicca per entrare nel gruppo Facebook</span>
+    </a>
+  </div>
+</section>
+
+<section class="mission-card">
+  <h2>✈️ Gruppo Telegram</h2>
+
+  <div style="text-align: center; padding: 10px 0;">
+    <a
+      href="https://t.me/+YEAgVpkrxKVhNzY8"
+      target="_blank"
+      style="display: inline-flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; color: #111827; font-weight: 900;">
+
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+        alt="Telegram"
+        style="width: 70px; height: 70px;">
+
+      <span>Clicca per entrare nel gruppo Telegram</span>
+    </a>
+  </div>
+</section>
+    </section>
+
+    <section id="sabato" class="day-panel">
+      <section class="map-card">
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?f=d&source=s_d&saddr=42.0044771,12.5291444&daddr=42.8760411,12.0192586+to:43.8352465,11.1597356+to:44.1728255,11.3390125+to:44.3432833,11.7111701+to:44.0533726,12.5952087&hl=it&output=embed"
+            loading="eager"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="map-note">
+          Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
+        </div>
+      </section>
+
+            <section class="card">
+        <h2>🛣️ Sabato 27/06 <span class="km">± 487 km</span></h2>
+
+        <div class="day-buttons">
+          <a class="mini-btn red" href="https://www.google.com/maps/dir/42.0044771,12.5291444/42.8760411,12.0192586/43.8352465,11.1597356/44.1728255,11.3390125/44.3432833,11.7111701/44.0533726,12.5952087/?entry=ttu" target="_blank">
+            Apri percorso del giorno in Google Maps
+          </a>
+        </div>
+
+        <div class="stop">
+          <div class="time">08:00</div>
+
+          <div class="stop-content">
+            <strong>Ritrovo 🤗⛽☕</strong>
+
+            <div class="stop-info-row">
+              <span>ENI Station, E35 Fi/Roma Salaria Est Aut. Aut, Roma</span>
+              <a class="weather-btn" href="https://www.windy.com/42.0044771/12.5291444?42.0044771,12.5291444,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/Wovzund9ZAKV7Tfa9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">08:30</div>
+
+          <div class="stop-content">
+            <strong>Partenza 🏁🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Toscana - Romagna</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">10:00</div>
+
+          <div class="stop-content">
+            <strong>Sosta ☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>124 km - 1:30 h — Distributore IP A1 - Km 427, 8 N, Snc, Fabro</span>
+              <a class="weather-btn" href="https://www.windy.com/42.8760411/12.0192586?42.8760411,12.0192586,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/5T7heowzCdXBGv6u5?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">10:15</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Si riparte verso Sesto Fiorentino</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">12:00</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>148 km - 1:40 h — Area di servizio IP, A1 Km 280, 4 N, Snc, Sesto Fiorentino</span>
+              <a class="weather-btn" href="https://www.windy.com/43.8352465/11.1597356?43.8352465,11.1597356,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/vtyx1FRMM7vtCkcb9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">12:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Verso la Raticosa</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">13:30</div>
+
+          <div class="stop-content">
+            <strong>Pranzo 📸🥪🚻</strong>
+
+            <div class="stop-info-row">
+              <span>51 km - 1 h — Bar Chalet Raticosa, Via Pietramala 2230, Firenzuola</span>
+              <a class="weather-btn" href="https://www.windy.com/44.1728255/11.3390125?44.1728255,11.3390125,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/MbXNtQ5D6Qpj1u4F6?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">14:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Imola</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">15:30</div>
+
+          <div class="stop-content">
+            <strong>Sosta ☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>44 km - 1 h — Bar Renzo Imola, Via R. Galli 1, Imola BO</span>
+              <a class="weather-btn" href="https://www.windy.com/44.3432833/11.7111701?44.3432833,11.7111701,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/xPZQj5hNbQjwLMQs7?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">16:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Rimini</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">17:30</div>
+
+          <div class="stop-content">
+            <strong>Arrivo 🏁</strong>
+
+            <div class="stop-info-row">
+              <span>112 km - 1:30 h — Hotel Vannucci, Viale Gabriele D'Annunzio 8, Rimini</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">—</div>
+
+          <div class="stop-content">
+            <strong>Check-in 💰 e sistemazione 🎒🛀</strong>
+
+            <div class="stop-info-row">
+              <span>Hotel Vannucci</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">19:30</div>
+
+          <div class="stop-content">
+            <strong>Aperitivo 🥂</strong>
+
+            <div class="stop-info-row">
+              <span>Hotel Vannucci / zona Rimini</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">20:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Museo Nazionale del Motociclo</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">20:10</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽</strong>
+
+            <div class="stop-info-row">
+              <span>Pieno benzina per il giorno dopo</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">20:20</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Verso la cena</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">20:30</div>
+
+          <div class="stop-content">
+            <strong>Cena 🌮🥗🍷</strong>
+
+            <div class="stop-info-row">
+              <span>Arrivo alla Trattoria "Da Renzi", Via Canonica 2122, Canonica (RN) — 20 km - 25 min</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0300/12.6000?44.0300,12.6000,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/zSEHbfw33y1rnykZ9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">…</div>
+
+          <div class="stop-content">
+            <strong>Rientro 🛌</strong>
+
+            <div class="stop-info-row">
+              <span>Chissà 🤣 — rientro Hotel Vannucci</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 class="section-title">📸 Da fotografare — Sabato 27/06</h2>
+
+      <section class="photos">
+        
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:Raticosadamtbeni.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/960px-Raticosadamtbeni.jpg" alt="Passo della Raticosa" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Passo della Raticosa</h3>
+            <p>Tappa iconica dell’Appennino tosco-emiliano: perfetta per foto di gruppo, moto e panorama.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://www.meteosestola.it/webcam/futa/" target="_blank" class="photo-link">
+            <img src="https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg" alt="Passo della Futa" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Passo della Futa</h3>
+            <p>Uno dei passaggi più conosciuti tra Toscana ed Emilia-Romagna, con atmosfera da vera strada motociclistica.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/Category:Appennino_tosco-emiliano" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Raticosadamtbeni.jpg/960px-Raticosadamtbeni.jpg" alt="Appennino Tosco-Emiliano" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Appennino Tosco-Emiliano</h3>
+            <p>Curve, crinali, boschi e tratti guidati: il paesaggio perfetto per il primo giorno.</p>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="section-title">🏍️ Per il biker — Sabato 27/06</h2>
+
+      <p class="biker-note">
+        Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non
+        rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada
+        e alle tue capacità.
+      </p>
+
+      <section class="biker-grid">
+        
+        <article class="biker-card">
+          <div class="biker-tag">Trasferimento</div>
+          <h3>Fabro → Sesto Fiorentino</h3>
+          <p>Tratto lungo e scorrevole per macinare chilometri: ritmo regolare, attenzione a traffico e stanchezza.</p>
+          <a href="https://www.google.com/maps/dir/Fabro/Sesto+Fiorentino" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+        <article class="biker-card">
+          <div class="biker-tag">Curve</div>
+          <h3>Sesto Fiorentino → Raticosa</h3>
+          <p>Salita appenninica con curve, cambi di ritmo e paesaggio: uno dei tratti più interessanti del sabato.</p>
+          <a href="https://www.google.com/maps/dir/Sesto+Fiorentino/Passo+della+Raticosa" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+        <article class="biker-card">
+          <div class="biker-tag">Guidato</div>
+          <h3>Raticosa → Imola</h3>
+          <p>Discesa verso la Romagna: strada motociclistica, curve e tratti panoramici da affrontare senza fretta.</p>
+          <a href="https://www.google.com/maps/dir/Passo+della+Raticosa/Imola" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+      </section>
+    </section>
+
+    
+    <section id="domenica" class="day-panel">
+      <section class="map-card">
+        <div class="map-wrap">
+          <iframe 
+            src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0533726,12.5952087&daddr=44.263550,12.347682+to:44.21579,12.08113+to:44.1067344,11.9815993+to:43.9328256,11.6552539+to:44.2400,12.1000+to:44.1498,12.4029+to:43.9328425,12.4502827+to:44.0533726,12.5952087&hl=it&output=embed"
+            loading="eager"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="map-note">
+          Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
+        </div>
+      </section>
+
+            <section class="card">
+        <h2>🏍️ Domenica 28/06 <span class="km">± 347 km</span></h2>
+
+        <div class="day-buttons">
+          <a class="mini-btn red" href="https://www.google.com/maps/dir/44.0533726,12.5952087/44.263550,12.347682/44.21579,12.08113/44.1067344,11.9815993/43.9328256,11.6552539/44.2400,12.1000/44.1498,12.4029/43.9328425,12.4502827/44.0533726,12.5952087/?entry=ttu" target="_blank">
+            Apri percorso del giorno in Google Maps
+          </a>
+        </div>
+
+        <div class="stop">
+          <div class="time">09:00</div>
+
+          <div class="stop-content">
+            <strong>Ritrovo 🤗</strong>
+
+            <div class="stop-info-row">
+              <span>Hotel Vannucci</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">09:15</div>
+
+          <div class="stop-content">
+            <strong>Partenza 🏁🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Casa La Corte - Forlì</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">10:30</div>
+
+          <div class="stop-content">
+            <strong>Sosta ☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>62 km - 1:15 h — Bar La Corte, Via Enrico Mattei 2/E, Forlì</span>
+              <a class="weather-btn" href="https://www.windy.com/44.21579/12.08113?44.21579,12.08113,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/XFoMiBzda9N6EUuZ7?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">11:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Passo del Muraglione</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">12:30</div>
+
+          <div class="stop-content">
+            <strong>Pranzo 📸🥪☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>58 km - 1:30 h — Bar Il Muraglione, Via Forlivese 91, San Godenzo FI</span>
+              <a class="weather-btn" href="https://www.windy.com/43.9328256/11.6552539?43.9328256,11.6552539,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/KhPk4ePkSgTgGg46A?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">13:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Bertinoro</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">15:00</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>71 km - 1:30 h — Area servizio Esso, AUT A14 BO/TA ADS BE, Bertinoro</span>
+              <a class="weather-btn" href="https://www.windy.com/44.21638/12.17732?44.21638,12.17732,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/5HxwfLD1LJjw9xqD9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">15:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione San Marino</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">16:30</div>
+
+          <div class="stop-content">
+            <strong>Visita 📸</strong>
+
+            <div class="stop-info-row">
+              <span>52 km - 1 h — San Marino, Parcheggio 7, Piazzale Cava degli Umbri</span>
+              <a class="weather-btn" href="https://www.windy.com/43.9328425/12.4502827?43.9328425,12.4502827,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/gfk9AwMCeAyZUj6V7?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">17:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Hotel Vannucci</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">18:15</div>
+
+          <div class="stop-content">
+            <strong>Arrivo 🏁</strong>
+
+            <div class="stop-info-row">
+              <span>29 km - 45 min — Hotel Vannucci, sosta 🛀</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">19:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Trattoria Da Renzi</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">20:00</div>
+
+          <div class="stop-content">
+            <strong>Cena 🍝</strong>
+
+            <div class="stop-info-row">
+              <span>Museo Nazionale del Motociclo, Via Casalecchio 58/N, Rimini — 8 km - 15 min</span>
+              <a class="weather-btn" href="https://www.windy.com/44.058097/12.4048583?44.058097,12.4048583,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/qwLer17BZJ8bNkt88?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">22:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Circa 😉 — direzione rientro</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">—</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽</strong>
+
+            <div class="stop-info-row">
+              <span>Pieno benzina per il giorno successivo</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">23:30</div>
+
+          <div class="stop-content">
+            <strong>Rientro 🛌</strong>
+
+            <div class="stop-info-row">
+              <span>Circa 😉 — Hotel Vannucci, 26 km - 30 min</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/xwhauEJVTK4cGAiNA?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 class="section-title">📸 Da fotografare — Domenica 28/06</h2>
+
+      <section class="photos">
+        
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:Passo_del_Muraglione_(San_Godenzo)_01.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Passo_del_Muraglione_%28San_Godenzo%29_01.jpg/960px-Passo_del_Muraglione_%28San_Godenzo%29_01.jpg" alt="Passo del Muraglione" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Passo del Muraglione</h3>
+            <p>Uno dei punti più motociclistici della domenica: sosta, foto e curve.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:Bertinoro_balcone_di_Romagna.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Bertinoro_balcone_di_Romagna.jpg/960px-Bertinoro_balcone_di_Romagna.jpg" alt="Bertinoro" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Bertinoro</h3>
+            <p>Balcone della Romagna: colline, vista aperta e atmosfera da sosta panoramica.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:San_marino_guaita.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/San_marino_guaita.jpg/960px-San_marino_guaita.jpg" alt="San Marino" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>San Marino</h3>
+            <p>Centro storico, torri e panorama sulla Riviera: uno dei punti più fotografici del weekend.</p>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="section-title">🏍️ Per il biker — Domenica 28/06</h2>
+
+      <p class="biker-note">
+        Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non
+        rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada
+        e alle tue capacità.
+      </p>
+
+      <section class="biker-grid">
+        
+        <article class="biker-card">
+  <div class="biker-tag">Tecnico</div>
+  <h3>Casa La Corte → Muraglione</h3>
+  <p>
+    Questo è il tratto più tecnico della domenica: una bella sequenza di curve, cambi di ritmo e tratti guidati fino al Passo del Muraglione.
+  </p>
+  <a href="https://www.google.com/maps/dir/44.21579,12.08113/44.1067344,11.9815993/43.9328256,11.6552539/?entry=ttu" target="_blank">
+    Apri tratto su Google Maps
+  </a>
+</article>
+        <article class="biker-card">
+          <div class="biker-tag">Panoramico</div>
+          <h3>Muraglione → Bertinoro</h3>
+          <p>Rientro verso le colline romagnole: tratti vari, paesaggi aperti e guida piacevole.</p>
+          <a href="https://www.google.com/maps/dir/Passo+del+Muraglione/Bertinoro" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+        <article class="biker-card">
+          <div class="biker-tag">Turistico</div>
+          <h3>Bertinoro → San Marino</h3>
+          <p>Tratto più rilassato e panoramico, perfetto per arrivare alla visita senza stress.</p>
+          <a href="https://www.google.com/maps/dir/Bertinoro/San+Marino" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+      </section>
+    </section>
+
+    
+    <section id="lunedi" class="day-panel">
+      <section class="map-card">
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?f=d&source=s_d&saddr=44.0533726,12.5952087&daddr=43.9653376,12.6025071+to:43.8983251,12.7536266+to:43.7247469,12.6366847+to:43.3624069,12.554409+to:42.6754241,12.5524578+to:42.0034203,12.5279729&hl=it&output=embed"
+            loading="eager"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="map-note">
+          Mappa Google incorporata. Per aprire il percorso completo con tutte le tappe, usa il pulsante rosso.
+        </div>
+      </section>
+
+            <section class="card">
+        <h2>🏁 Lunedì 29/06 <span class="km">± 314 km</span></h2>
+
+        <div class="day-buttons">
+          <a class="mini-btn red" href="https://www.google.com/maps/dir/44.0533726,12.5952087/43.9653376,12.6025071/43.8983251,12.7536266/43.7247469,12.6366847/43.3624069,12.554409/42.6754241,12.5524578/42.0034203,12.5279729/?entry=ttu" target="_blank">
+            Apri percorso del giorno in Google Maps
+          </a>
+        </div>
+
+        <div class="stop">
+          <div class="time">09:00</div>
+
+          <div class="stop-content">
+            <strong>Ritrovo 🤗</strong>
+
+            <div class="stop-info-row">
+              <span>Hotel Vannucci</span>
+              <a class="weather-btn" href="https://www.windy.com/44.0533726/12.5952087?44.0533726,12.5952087,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">09:15</div>
+
+          <div class="stop-content">
+            <strong>Partenza 🏁🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Museo La Storia del Sic</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">09:45</div>
+
+          <div class="stop-content">
+            <strong>Visita ❤️</strong>
+
+            <div class="stop-info-row">
+              <span>5 km - 10 min — Museo La Storia del Sic, Via G. Garibaldi 127, Coriano</span>
+              <a class="weather-btn" href="https://www.windy.com/43.9653376/12.6025071?43.9653376,12.6025071,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/B8vZxRnTpMWyVXty5?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">11:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Tavullia</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">11:30</div>
+
+          <div class="stop-content">
+            <strong>Sosta 📸🚻☕🛍️</strong>
+
+            <div class="stop-info-row">
+              <span>21 km - 30 min — VR46 Store, Via Cesare Battisti 8, Tavullia</span>
+              <a class="weather-btn" href="https://www.windy.com/43.8983251/12.7536266?43.8983251,12.7536266,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/yMMkkLhLwAZRbcDp9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">12:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Gubbio</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">13:30</div>
+
+          <div class="stop-content">
+            <strong>Pranzo 🥪☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>86 km - 1:30 h — Bar Contessa, Str. Contessa 4, Gubbio</span>
+              <a class="weather-btn" href="https://www.windy.com/43.3624069/12.554409?43.3624069,12.554409,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/DNDMyGJBpbTtZsav6?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">14:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Acquasparta</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">16:00</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽☕🚻</strong>
+
+            <div class="stop-info-row">
+              <span>105 km - 1:30 h — Esso, SS E45, KM 13+250, Acquasparta</span>
+              <a class="weather-btn" href="https://www.windy.com/42.6754241/12.5524578?42.6754241,12.5524578,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/nZepBLPrvNNxD62U9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">16:30</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Direzione Eni Salaria Ovest</span>
+            </div>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">17:30</div>
+
+          <div class="stop-content">
+            <strong>Sosta ⛽☕🚻 e saluti 🤗</strong>
+
+            <div class="stop-info-row">
+              <span>97 km - 1 h — Eni Salaria Ovest, A1</span>
+              <a class="weather-btn" href="https://www.windy.com/42.0034203/12.5279729?42.0034203,12.5279729,11" target="_blank">
+                🌦️ Meteo
+              </a>
+            </div>
+            <a class="maps-link" href="https://maps.app.goo.gl/pvAzHFiANMCDneZp9?g_st=ic" target="_blank">
+              Apri su Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="stop">
+          <div class="time">18:00</div>
+
+          <div class="stop-content">
+            <strong>Ripartenza 🏍️💨</strong>
+
+            <div class="stop-info-row">
+              <span>Tutti a casa 🏁🏠</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <h2 class="section-title">📸 Da fotografare — Lunedì 29/06</h2>
+
+      <section class="photos">
+        
+        <article class="photo-card">
+          <a href="https://riviera.rimini.it/it/arte-cultura/monumenti-opere-darte-patrimonio-unesco/strutture-dataer/11709-museo-marco-simoncelli-la-storia-del-sic" target="_blank" class="photo-link">
+            <img src="https://d13gisi6iet4nc.cloudfront.net/odm-prev/p%2Crn%2C2022%2Ccoriano%2Cmuseo_marco_simoncelli_la_storia_del_sic%2Cd%2C37369%2Cautore_sconosciuto.jpg" alt="Marco Simoncelli" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Marco Simoncelli</h3>
+            <p>Tappa emotiva e simbolica a Coriano, dedicata al Sic.</p>
+          </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:Tavullia.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Tavullia.jpg/960px-Tavullia.jpg" alt="Tavullia" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Tavullia</h3>
+            <p>Tappa iconica per ogni motociclista: foto, VR46 e atmosfera da motori.</p>
+         </div>
+        </article>
+        <article class="photo-card">
+          <a href="https://commons.wikimedia.org/wiki/File:Gubbio,_panorama_01.jpg" target="_blank" class="photo-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Gubbio%2C_panorama_01.jpg/960px-Gubbio%2C_panorama_01.jpg" alt="Gubbio" loading="lazy">
+          </a>
+
+          <div class="photo-body">
+            <h3>Gubbio</h3>
+            <p>Città medievale spettacolare: pietra, salite, scorci e panorama umbro.</p>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="section-title">🏍️ Per il biker — Lunedì 29/06</h2>
+
+      <p class="biker-note">
+        Nota per il biker: i punti indicati sono suggerimenti basati sulle caratteristiche generali del percorso e non
+        rappresentano un’analisi tecnica dettagliata curva per curva. Guida sempre in base alle condizioni reali della strada
+        e alle tue capacità.
+      </p>
+
+      <section class="biker-grid">
+        
+        <article class="biker-card">
+          <div class="biker-tag">Emotivo</div>
+          <h3>Rimini → Coriano</h3>
+          <p>Tappa breve ma simbolica verso il museo dedicato al Sic.</p>
+          <a href="https://www.google.com/maps/dir/Rimini/La+Storia+del+Sic+Coriano" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+        <article class="biker-card">
+          <div class="biker-tag">Iconico</div>
+          <h3>Coriano → Tavullia</h3>
+          <p>Tratto breve, ma molto motociclistico per significato: dalla memoria del Sic al mondo VR46.</p>
+          <a href="https://www.google.com/maps/dir/Coriano/Tavullia" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+        <article class="biker-card">
+          <div class="biker-tag">Scorrevole</div>
+          <h3>Tavullia → Gubbio</h3>
+          <p>Viaggio più ampio tra Marche e Umbria: alterna tratti scorrevoli e arrivo scenico.</p>
+          <a href="https://www.google.com/maps/dir/Tavullia/Gubbio" target="_blank">Apri tratto su Google Maps</a>
+        </article>
+      </section>
+    </section>
+
+    <div class="footer-space"></div>
+  </main>
+  
+<!-- Pulsante fisso per tornare in alto -->
+<button class="back-to-top" type="button" onclick="tornaInAlto()" aria-label="Torna in alto">
+  🔝
+</button>
+  
+  <script>
+    const buttons = document.querySelectorAll('.tab-button');
+    const panels = document.querySelectorAll('.day-panel');
+
+    function activateTab(tab) {
+      buttons.forEach(button => button.classList.remove('active'));
+      panels.forEach(panel => panel.classList.remove('active'));
+
+      const selectedButton = document.querySelector(`.tab-button[data-tab="${tab}"]`);
+      const selectedPanel = document.getElementById(tab);
+
+      if (selectedButton && selectedPanel) {
+  selectedButton.classList.add('active');
+  selectedPanel.classList.add('active');
+
+  // Porta automaticamente il tab selezionato al centro della barra scorrevole
+  // Utile su iPhone quando clicchi "Vai al programma" e Sabato è fuori schermo
+  selectedButton.scrollIntoView({
+    behavior: 'smooth',
+    inline: 'center',
+    block: 'nearest'
+  });
+
+  window.scrollTo({
+    top: document.getElementById('programma').offsetTop,
+    behavior: 'smooth'
+  });
+}
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        activateTab(button.dataset.tab);
+      });
+    });
+
+    const infoButton = document.getElementById('infoButton');
+
+    if (infoButton) {
+      infoButton.addEventListener('click', event => {
+        event.preventDefault();
+        activateTab('generale');
+      });
+    }
+
+    const programmaButton = document.getElementById('programmaButton');
+
+if (programmaButton) {
+  programmaButton.addEventListener('click', event => {
+    event.preventDefault();
+    activateTab('sabato');
+  });
+}
+  </script>
+  <script>
+  function stampaProgrammaPDF() {
+    const contenutoPDF = `
+      <html>
+      <head>
+        <title>Programma Toscana - Romagna</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 24px;
+            color: #111827;
+          }
+
+          h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 8px;
+          }
+
+          h2 {
+            margin-top: 28px;
+            font-size: 22px;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 6px;
+          }
+
+          h3 {
+            margin-top: 18px;
+            font-size: 18px;
+          }
+
+          ul {
+            padding-left: 22px;
+          }
+
+          li {
+            margin: 7px 0;
+            line-height: 1.4;
+          }
+
+          .totale {
+            margin-top: 12px;
+            font-weight: bold;
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 8px;
+          }
+
+          .box {
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 14px;
+            margin: 14px 0;
+          }
+
+          @media print {
+            button {
+              display: none;
+            }
+          }
+        </style>
+      </head>
+
+      <body>
+        <h1>🏍️ TOSCANA - ROMAGNA</h1>
+        <p style="text-align:center;">
+          Programma sintetico con tappe, orari, pranzi e cene
+        </p>
+
+        <h2>Sabato 27/06</h2>
+        <ul>
+          <li><strong>08:00</strong> — Ritrovo 🤗⛽☕ ENI Salaria Est</li>
+          <li><strong>08:30</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>10:00</strong> — Sosta ☕🚻 IP Fabro</li>
+          <li><strong>10:15</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>12:00</strong> — Sosta ⛽☕🚻 IP Sesto Fiorentino</li>
+          <li><strong>12:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>13:30</strong> — Pranzo 📸🥪🚻 Chalet Raticosa</li>
+          <li><strong>14:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>15:30</strong> — Sosta ☕🚻 Bar Renzo - Imola</li>
+          <li><strong>16:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>17:30</strong> — Arrivo 🏁 Hotel Vannucci - Rimini</li>
+          <li><strong>19:30</strong> — Aperitivo 🥂</li>
+          <li><strong>20:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:10</strong> — Sosta benzina ⛽ per il giorno dopo</li>
+          <li><strong>20:20</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:30</strong> — Cena 🍝 Trattoria Da Renzi</li>
+        </ul>
+        <div class="totale">Totale: 487 km</div>
+
+        <h2>Domenica 28/06</h2>
+        <ul>
+          <li><strong>09:00</strong> — Ritrovo 🤗 Hotel Vannucci</li>
+          <li><strong>09:15</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>10:30</strong> — Sosta ☕🚻 Ristorante Casa La Corte - Forlì</li>
+          <li><strong>11:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>12:30</strong> — Pranzo 📸🥪☕🚻 Bar Il Muraglione</li>
+          <li><strong>13:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>15:00</strong> — Sosta ⛽☕🚻 Esso Bertinoro</li>
+          <li><strong>15:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>16:30</strong> — Visita 📸 San Marino</li>
+          <li><strong>17:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>18:15</strong> — Arrivo 🏁 Hotel Vannucci</li>
+          <li><strong>19:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>20:00</strong> — Cena 🌮🥗🍷 Museo Nazionale del Motociclo</li>
+          <li><strong>22:30 circa</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>23:30 circa</strong> — Rientro Hotel Vannucci 🛌</li>
+        </ul>
+        <div class="totale">Totale: 347 km</div>
+
+        <h2>Lunedì 29/06</h2>
+        <ul>
+          <li><strong>09:00</strong> — Ritrovo 🤗 Hotel Vannucci</li>
+          <li><strong>09:15</strong> — Partenza 🏁🏍️💨</li>
+          <li><strong>09:45</strong> — Visita ❤️ Museo La Storia del Sic - Coriano</li>
+          <li><strong>11:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>11:30</strong> — Sosta 📸🚻☕🛍️ VR46 Store - Tavullia</li>
+          <li><strong>12:00</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>13:30</strong> — Pranzo 🥪☕🚻 Bar Contessa - Gubbio</li>
+          <li><strong>14:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>16:00</strong> — Sosta ⛽☕🚻 Esso E45 - Acquasparta</li>
+          <li><strong>16:30</strong> — Ripartenza 🏍️💨</li>
+          <li><strong>17:30</strong> — Sosta ⛽☕🚻 e saluti 🤗 Eni Salaria Ovest</li>
+          <li><strong>18:00</strong> — Ripartenza 🏍️💨 tutti a casa 🏁🏠</li>
+        </ul>
+        <div class="totale">Totale: 314 km</div>
+
+        <h2>Riassunto pranzi e cene</h2>
+
+        <div class="box">
+          <h3>🥪 Pranzi</h3>
+          <ul>
+            <li>Sabato — Chalet Raticosa: da confermare</li>
+            <li>Domenica — Bar Il Muraglione: da confermare</li>
+            <li>Lunedì — Bar Contessa, Gubbio: da confermare</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>🍷 Cene</h3>
+          <ul>
+            <li>Sabato — MotoClub / Museo Nazionale del Motociclo: <strong>15,00 €</strong></li>
+            <li>Domenica — Trattoria Da Renzi: <strong>25,00 €</strong></li>
+          </ul>
+        </div>
+      </body>
+      </html>
+    `;
+
+    const finestra = window.open('', '_blank');
+    finestra.document.open();
+    finestra.document.write(contenutoPDF);
+    finestra.document.close();
+
+    finestra.onload = function () {
+      finestra.print();
+    };
+  }
+
+  function tornaInAlto() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}  
+    
+</script>
+</body>
+</html>

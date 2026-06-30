@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TOSCANA - ROMAGNA | Grazie a tutti</title>
+
+  <style>
+    :root {
+      --bg: #f3f4f6;
+      --text: #111827;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --border: #e5e7eb;
+      --orange: #ea580c;
+      --green: #15803d;
+      --dark: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 360px;
+      padding: 44px 18px 38px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(17, 24, 39, .72), rgba(31, 41, 55, .50)),
+        url("https://stazioni.meteoproject.it/webcam/passofuta/futa.jpg");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      line-height: 1.04;
+      margin: 0;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .hero .subtitle {
+      margin: 14px 0 0;
+      max-width: 720px;
+      color: #e5e7eb;
+      font-size: 17px;
+      line-height: 1.48;
+    }
+
+    .hero-logo {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45));
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .22);
+      font-weight: 900;
+      letter-spacing: .2px;
+      backdrop-filter: blur(8px);
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 14px;
+      transform: translateY(-34px);
+    }
+
+    .mission-card,
+    .memory-card {
+      background: var(--card);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .09);
+      border: 1px solid rgba(0, 0, 0, .05);
+      margin-bottom: 18px;
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 25px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: #4b5563;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .lead {
+      color: #374151;
+      font-size: 18px;
+      line-height: 1.58;
+    }
+
+    .group-photo {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+      margin: 18px 0;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .17);
+      object-fit: cover;
+      max-height: 680px;
+    }
+
+    .photo-placeholder {
+      display: none;
+      border: 2px dashed #d1d5db;
+      background: #f9fafb;
+      color: #6b7280;
+      border-radius: 20px;
+      padding: 34px 18px;
+      text-align: center;
+      line-height: 1.5;
+      margin: 18px 0;
+      font-weight: 800;
+    }
+
+    .warning {
+      margin-top: 16px;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #7c2d12;
+      border-radius: 18px;
+      padding: 16px;
+      line-height: 1.45;
+      font-size: 17px;
+    }
+
+    .final-message {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      color: #7f1d1d;
+      font-weight: 900;
+      line-height: 1.42;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .memory-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .memory-list li {
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px 14px;
+      color: #374151;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      padding: 15px 16px;
+      border-radius: 16px;
+      font-weight: 900;
+      font-size: 16px;
+      border: none;
+    }
+
+    .btn.red {
+      background: var(--red);
+    }
+
+    .btn.dark {
+      background: var(--dark);
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #111827;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 13px;
+      font-weight: 900;
+    }
+
+    .social-link img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .footer-space {
+      height: 8px;
+    }
+
+    @media (min-width: 800px) {
+      .hero {
+        min-height: 420px;
+        padding: 58px 30px 70px;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .hero .subtitle {
+        font-size: 20px;
+      }
+
+      .hero-logo {
+        width: 140px;
+        height: 140px;
+      }
+
+      main {
+        padding: 18px;
+      }
+
+      .mission-card,
+      .memory-card {
+        padding: 26px;
+      }
+
+      .buttons {
+        flex-direction: row;
+      }
+
+      .btn {
+        width: auto;
+        min-width: 250px;
+      }
+
+      .memory-list,
+      .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 35px;
+        padding-right: 82px;
+      }
+
+      .hero-logo {
+        width: 66px;
+        height: 66px;
+      }
+
+      main {
+        padding: 12px 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🏁 Weekend concluso</div>
+
+      <h1>TOSCANA - ROMAGNA</h1>
+
+      <p class="subtitle">
+        Parecchia benzina, una quantità imprecisata di caffè, ottimo cibo,
+        risate assicurate, tante curve e ricordi da tenere stretti.
+      </p>
+
+      <!-- LOGO MOTO CLUB
+           Per cambiare logo, modifica solo il valore src="" qui sotto.
+           Se il logo non serve, puoi cancellare direttamente questo tag img. -->
+      <img
+        class="hero-logo"
+        src="assets/logo-motoclub.png"
+        alt="Logo Uscite in Moto Roma e Provincia"
+        onerror="this.style.display='none';">
+    </div>
+  </section>
+
+  <main>
+    <section class="mission-card">
+      <h2>🏍️❤️ Grazie a tutti</h2>
+
+      <p class="lead">
+        Il weekend Toscana-Romagna è finito, le moto sono tornate a casa e probabilmente
+        qualcuno sta ancora digerendo tagliatelle, piadina, curve appenniniche e qualche
+        caffè di troppo 😄☕
+      </p>
+
+      <!-- FOTO DEL GRUPPO
+           Per inserire la foto vera:
+           1. carica la foto nella cartella assets
+           2. rinominala foto-gruppo.jpg
+           3. se vuoi usare un altro nome, modifica solo src="assets/foto-gruppo.jpg" -->
+      <img
+        class="group-photo"
+        src="assets/foto-gruppo.jpg"
+        alt="Foto del gruppo Toscana-Romagna"
+        onerror="this.style.display='none'; document.querySelector('.photo-placeholder').style.display='block';">
+
+      <div class="photo-placeholder">
+        📸 Qui comparirà la foto del gruppo.<br>
+        Carica una foto chiamata <strong>foto-gruppo.jpg</strong> dentro la cartella <strong>assets</strong>.
+      </div>
+
+      <p>
+        Grazie a tutti per la partecipazione, la compagnia, le risate, la pazienza,
+        lo spirito di gruppo e per aver reso questi giorni qualcosa da ricordare.
+      </p>
+
+      <p>
+        Tra soste, benzina, pranzi, cene, temporali schivati, chilometri macinati e
+        momenti da raccontare, ci portiamo a casa un bel pezzo di strada condivisa.
+      </p>
+
+      <div class="warning">
+        ❤️ Alla fine non contano solo i chilometri percorsi,
+        <br>
+        ma le persone con cui li hai condivisi.
+        <br><br>
+        E stavolta direi che il gruppo ha funzionato alla grande 😎🏍️🔥
+      </div>
+    </section>
+
+    <section class="memory-card">
+      <h2>📌 Ci portiamo a casa</h2>
+
+      <ul class="memory-list">
+        <li>🏍️ Tante curve fatte insieme</li>
+        <li>☕ Caffè strategici e soste fondamentali</li>
+        <li>🍝 Recupero calorie eseguito con professionalità</li>
+        <li>📸 Foto, panorami e momenti da salvare</li>
+        <li>🤝 Spirito di gruppo e zero fretta</li>
+        <li>🔥 La voglia di organizzare già la prossima uscita</li>
+      </ul>
+
+      <div class="final-message">
+        Weekend chiuso ufficialmente.<br>
+        Le moto si raffreddano, ma i ricordi restano accesi ❤️🏍️💨
+      </div>
+    </section>
+
+    <section class="mission-card">
+      <h2>📍 Archivio weekend</h2>
+
+      <p>
+        Il vecchio programma non è stato cancellato: resta salvato in una pagina separata,
+        così puoi rivedere percorso, tappe, costi, checklist e tutto il lavoro fatto.
+      </p>
+
+      <div class="buttons">
+        <!-- LINK AL VECCHIO SITO COMPLETO
+             Se cambi nome al file programma-weekend.html, modifica solo href="" qui sotto. -->
+        <a class="btn red" href="programma-weekend.html">
+          📍 Rivedi il programma del weekend
+        </a>
+
+        <a class="btn dark" href="#social">
+          💬 Gruppi e contatti
+        </a>
+      </div>
+    </section>
+
+    <section id="social" class="mission-card">
+      <h2>💬 Restiamo collegati</h2>
+
+      <p>
+        Per foto, video, prossime uscite e inevitabili prese in giro post-weekend,
+        i gruppi restano il nostro box ufficiale 😄👇
+      </p>
+
+      <div class="social-grid">
+        <!-- Per cambiare link WhatsApp, modifica solo href="" -->
+        <a class="social-link" href="https://chat.whatsapp.com/F2wSnaRa2Qf2OGI1LvB236?s=cl&p=i&ilr=0" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+          <span>Gruppo WhatsApp</span>
+        </a>
+
+        <!-- Per cambiare link Facebook, modifica solo href="" -->
+        <a class="social-link" href="https://www.facebook.com/share/g/1JEknbBSzM/?mibextid=wwXIfr" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+          <span>Gruppo Facebook</span>
+        </a>
+
+        <!-- Per cambiare link Telegram, modifica solo href="" -->
+        <a class="social-link" href="https://t.me/+YEAgVpkrxKVhNzY8" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+          <span>Gruppo Telegram</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
+  </main>
+</body>
+</html>

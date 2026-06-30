@@ -1,0 +1,15 @@
+TOSCANA-ROMAGNA - VERSIONE RINGRAZIAMENTI
+
+Contenuto ZIP:
+- index.html -> nuova pagina unica con ringraziamenti finali.
+- programma-weekend.html -> vecchio sito completo salvato, così non perdi il codice.
+- assets/logo-motoclub.png -> logo, se disponibile.
+
+FOTO DEL GRUPPO:
+Per inserire la foto del gruppo, carica nella cartella assets una foto chiamata:
+foto-gruppo.jpg
+
+In alternativa, apri index.html e cambia questo punto:
+src="assets/foto-gruppo.jpg"
+
+Il link "Rivedi il programma del weekend" apre programma-weekend.html.
